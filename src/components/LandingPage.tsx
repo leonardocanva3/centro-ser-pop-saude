@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
   Baby,
   Brain,
   Check,
@@ -38,77 +37,65 @@ const maps =
 
 const nav = [
   ["Início", "#inicio"],
-  ["O Centro SER", "#centro"],
+  ["Centro SER", "#centro"],
   ["Atendimentos", "#atendimentos"],
+  ["IntegraVida", "#integravida"],
   ["Silvia", "#silvia"],
-  ["Ambiente", "#ambiente"],
   ["Localização", "#localizacao"],
 ] as const;
 
-const credentials = ["CRP 06/213394", "Atendimento presencial, online e domiciliar", "Piracicaba/SP"];
-
-const carePillars = [
-  {
-    title: "Acolhimento",
-    text: "Escuta qualificada, presença e respeito à história de cada paciente.",
-    icon: HeartHandshake,
-  },
-  {
-    title: "Ética",
-    text: "Cuidado profissional, sigiloso e conduzido com responsabilidade.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Singularidade",
-    text: "Um olhar individualizado para necessidades emocionais, familiares e pedagógicas.",
-    icon: Sparkles,
-  },
-];
-
-const serviceCards = [
-  { title: "Psicoterapia Infantil", text: "Acolhimento lúdico e sensível para crianças.", icon: Baby },
-  { title: "Psicoterapia para Adolescentes", text: "Escuta, vínculo e orientação familiar.", icon: UsersRound },
-  { title: "Psicoterapia para Adultos", text: "Autoconhecimento, saúde emocional e TCC.", icon: Brain },
-  { title: "Psicoterapia para Idosos", text: "Cuidado respeitoso com história e autonomia.", icon: HeartHandshake },
-  { title: "TCC", text: "Terapia Cognitivo-Comportamental baseada em evidências.", icon: Stethoscope },
-  { title: "Reforço Escolar Especializado", text: "Apoio pedagógico com olhar inclusivo.", icon: GraduationCap },
-  { title: "Neurodivergências", text: "Suporte a crianças neurodivergentes e famílias.", icon: Sparkles },
-  { title: "Atendimento Domiciliar", text: "Cuidado humanizado no ambiente familiar.", icon: Home },
+const services = [
+  { title: "Psicoterapia Infantil", text: "Escuta lúdica, acolhimento e vínculo.", icon: Baby },
+  { title: "Adolescentes", text: "Apoio emocional e orientação familiar.", icon: UsersRound },
+  { title: "Adultos", text: "TCC, autoconhecimento e regulação emocional.", icon: Brain },
+  { title: "Idosos", text: "Cuidado sensível, história e autonomia.", icon: HeartHandshake },
+  { title: "TCC", text: "Prática clínica baseada em evidências.", icon: Stethoscope },
+  { title: "Reforço especializado", text: "Apoio pedagógico com olhar inclusivo.", icon: GraduationCap },
+  { title: "Neurodivergências", text: "Suporte a crianças, famílias e educadores.", icon: Sparkles },
+  { title: "Domiciliar", text: "Atendimento humanizado no ambiente familiar.", icon: Home },
 ];
 
 function whatsappLink(message = "Olá, vim pelo site do Centro SER e gostaria de agendar um atendimento.") {
   return `${whatsappBase}?text=${encodeURIComponent(message)}`;
 }
 
-function WhatsAppButton({
+function PremiumButton({
   children,
   href = whatsappLink(),
+  variant = "primary",
   large = false,
 }: {
   children: ReactNode;
   href?: string;
+  variant?: "primary" | "secondary";
   large?: boolean;
 }) {
+  const base =
+    "group relative inline-flex items-center justify-center overflow-hidden rounded-full font-extrabold transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#2f6f73] focus:ring-offset-2";
+  const size = large ? "min-h-14 px-8 py-4 text-base" : "min-h-12 px-6 py-3 text-sm";
+  const style =
+    variant === "primary"
+      ? "bg-[#2f6f73] text-white shadow-[0_18px_42px_rgba(47,111,115,0.25)] hover:bg-[#285f62]"
+      : "border border-[#c9ad69] bg-white/82 text-[#2f4746] shadow-[0_12px_30px_rgba(92,74,37,0.08)] hover:bg-[#fffaf0]";
+
   return (
-    <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-      <Link
-        className={`inline-flex items-center justify-center gap-2 rounded-full bg-[#2f6f73] font-bold text-white shadow-[0_18px_38px_rgba(47,111,115,0.24)] transition hover:bg-[#285f62] focus:outline-none focus:ring-2 focus:ring-[#2f6f73] focus:ring-offset-2 ${
-          large ? "min-h-14 px-8 py-4 text-base" : "min-h-12 px-6 py-3 text-sm"
-        }`}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FaWhatsapp aria-hidden="true" className="text-lg" />
-        {children}
+    <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.985 }}>
+      <Link className={`${base} ${size} ${style}`} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}>
+        {variant === "primary" ? <FaWhatsapp aria-hidden="true" className="relative z-10 text-lg" /> : null}
+        <span className="relative z-10">{children}</span>
+        <span className="absolute inset-y-0 left-[-45%] w-1/3 rotate-12 bg-white/20 blur-md transition duration-700 group-hover:left-[120%]" />
       </Link>
     </motion.div>
   );
 }
 
-function Eyebrow({ children }: { children: ReactNode }) {
+function Eyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return (
-    <span className="inline-flex rounded-full border border-[#c9ad69]/45 bg-[#fbf8f1] px-4 py-2 text-[0.72rem] font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">
+    <span
+      className={`inline-flex rounded-full border px-4 py-2 text-[0.7rem] font-extrabold uppercase tracking-[0.24em] ${
+        light ? "border-white/20 bg-white/10 text-[#dec987]" : "border-[#c9ad69]/45 bg-[#fffdf8]/82 text-[#9b7a33]"
+      }`}
+    >
       {children}
     </span>
   );
@@ -116,10 +103,31 @@ function Eyebrow({ children }: { children: ReactNode }) {
 
 function Bullet({ children }: { children: ReactNode }) {
   return (
-    <li className="flex gap-3 text-sm font-semibold leading-6 text-[#49443c]">
+    <li className="flex gap-3 text-sm font-bold leading-6 text-[#4b463d]">
       <Check className="mt-1 shrink-0 text-[#b28b3d]" size={16} />
       <span>{children}</span>
     </li>
+  );
+}
+
+function EditorialImage({
+  src,
+  alt,
+  className = "",
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}) {
+  return (
+    <div className={`group relative overflow-hidden rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_30px_90px_rgba(47,111,115,0.13)] ${className}`}>
+      <div className="relative h-full min-h-[320px] overflow-hidden rounded-[1.55rem]">
+        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" priority={priority} />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.18))]" />
+      </div>
+    </div>
   );
 }
 
@@ -129,15 +137,16 @@ export default function LandingPage({ faqs }: LandingPageProps) {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#fbf8f1] text-[#2f2c27]">
       <header className="sticky top-0 z-50 border-b border-[#eadfcd]/80 bg-[#fffdf8]/88 shadow-[0_12px_42px_rgba(47,111,115,0.06)] backdrop-blur-2xl">
-        <div className="mx-auto flex min-h-[104px] max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
-          <Link href="#inicio" className="relative h-20 w-60 shrink-0 sm:h-24 sm:w-72" aria-label="Ir para o início">
-            <Image src="/images/marca-dagua.png" alt="Logo Centro SER Espaço NeuroAfetivo" fill sizes="(min-width: 640px) 288px, 240px" className="object-contain object-left" priority />
+        <div className="mx-auto flex min-h-[92px] max-w-7xl items-center justify-between gap-5 px-4 sm:px-6 lg:min-h-[104px] lg:px-8">
+          <Link href="#inicio" className="relative h-16 w-48 shrink-0 sm:h-20 sm:w-60 lg:h-24 lg:w-72" aria-label="Ir para o início">
+            <Image src="/images/marca-dagua.png" alt="Logo Centro SER Espaço NeuroAfetivo" fill sizes="(min-width: 1024px) 288px, (min-width: 640px) 240px, 192px" className="object-contain object-left" priority />
           </Link>
 
-          <nav className="hidden items-center gap-8 xl:flex" aria-label="Navegação principal">
+          <nav className="hidden items-center gap-7 xl:flex" aria-label="Navegação principal">
             {nav.map(([label, href]) => (
-              <Link key={label} href={href} className="border-b border-transparent pb-1 text-[0.8rem] font-bold text-[#2f6f73] transition duration-300 hover:border-[#c9ad69] hover:text-[#245d61]">
+              <Link key={label} href={href} className="group relative pb-2 text-[0.78rem] font-extrabold text-[#2f6f73] transition duration-300 hover:text-[#245d61]">
                 {label}
+                <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#c9ad69] transition duration-300 group-hover:scale-x-100" />
               </Link>
             ))}
           </nav>
@@ -146,7 +155,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
             <Link href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram do Centro SER" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#e1d6c3] bg-white/82 text-[#2f6f73] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#c9ad69] hover:text-[#9b7a33]">
               <FaInstagram />
             </Link>
-            <WhatsAppButton>Agendar pelo WhatsApp</WhatsAppButton>
+            <PremiumButton>Agendar pelo WhatsApp</PremiumButton>
           </div>
 
           <details className="relative lg:hidden">
@@ -156,7 +165,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
             <div className="absolute right-0 top-14 w-[min(86vw,320px)] rounded-[1.5rem] border border-[#eadfcd] bg-[#fffdf8] p-4 shadow-2xl">
               <div className="grid gap-1">
                 {nav.map(([label, href]) => (
-                  <Link key={label} href={href} className="rounded-2xl px-4 py-3 text-sm font-bold text-[#45413a] hover:bg-[#f5efe4]">
+                  <Link key={label} href={href} className="rounded-2xl px-4 py-3 text-sm font-bold text-[#2f6f73] hover:bg-[#f5efe4]">
                     {label}
                   </Link>
                 ))}
@@ -170,27 +179,31 @@ export default function LandingPage({ faqs }: LandingPageProps) {
       </header>
 
       <main>
-        <section id="inicio" className="relative overflow-hidden bg-[#fffdf8]">
-          <div className="absolute inset-x-0 top-0 h-48 bg-[radial-gradient(circle_at_25%_0%,rgba(140,186,193,0.18),transparent_34%),linear-gradient(180deg,#f5efe4,rgba(245,239,228,0))]" />
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_0.92fr] lg:px-8 lg:py-16 xl:gap-16">
+        <section id="inicio" className="relative isolate overflow-hidden bg-[#fffdf8]">
+          <div className="pointer-events-none absolute left-[-9rem] top-10 h-80 w-80 rounded-full bg-[#8bbac1]/18 blur-3xl" />
+          <div className="pointer-events-none absolute right-[-8rem] top-20 h-96 w-96 rounded-full bg-[#c9ad69]/16 blur-3xl" />
+          <div className="pointer-events-none absolute left-[7%] top-36 hidden h-px w-52 bg-[#c9ad69]/45 lg:block" />
+          <div className="pointer-events-none absolute bottom-16 right-[42%] hidden h-24 w-24 rounded-full border border-[#c9ad69]/30 lg:block" />
+
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-10 sm:px-6 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[0.95fr_1.05fr] lg:px-8 lg:py-14 xl:gap-16">
             <div className="relative z-10">
               <Eyebrow>Psicologia • Educação Inclusiva • IntegraVida</Eyebrow>
-              <h1 className="mt-6 max-w-3xl font-serif text-[2.25rem] font-semibold leading-[1.1] tracking-normal text-[#2f6f73] sm:text-[3.15rem] lg:text-[3.4rem] xl:text-[3.75rem]">
+              <h1 className="mt-6 max-w-3xl font-serif text-[2.2rem] font-semibold leading-[1.1] tracking-normal text-[#2f6f73] sm:text-[2.9rem] lg:text-[3.1rem] xl:text-[3.35rem]">
                 Centro SER: cuidado integral para cada fase da vida
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5f594f] sm:text-xl">
                 Psicologia TCC, desenvolvimento humano, apoio psicopedagógico e atendimento domiciliar humanizado em Piracicaba.
               </p>
+
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <WhatsAppButton large>Agendar pelo WhatsApp</WhatsAppButton>
-                <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                  <Link href="#atendimentos" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-[#c9ad69] bg-white px-8 py-4 text-base font-bold text-[#354745] shadow-sm transition hover:bg-[#fbf8f1]">
-                    Conhecer atendimentos <ArrowRight size={18} aria-hidden="true" />
-                  </Link>
-                </motion.div>
+                <PremiumButton large>Agendar pelo WhatsApp</PremiumButton>
+                <PremiumButton href="#atendimentos" variant="secondary" large>
+                  Conhecer atendimentos
+                </PremiumButton>
               </div>
+
               <div className="mt-9 grid gap-3 sm:grid-cols-3">
-                {credentials.map((item) => (
+                {["CRP 06/213394", "Presencial, online e domiciliar", "Piracicaba/SP"].map((item) => (
                   <div key={item} className="border-l border-[#d8c79a] pl-4">
                     <p className="text-sm font-extrabold leading-6 text-[#344947]">{item}</p>
                   </div>
@@ -199,19 +212,16 @@ export default function LandingPage({ faqs }: LandingPageProps) {
             </div>
 
             <div className="relative z-10">
-              <div className="group rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_34px_100px_rgba(47,111,115,0.18)]">
-                <div className="relative min-h-[360px] overflow-hidden rounded-[1.55rem] sm:min-h-[520px]">
-                  <Image src="/images/fachada.jpg" alt="Fachada do Centro SER em Piracicaba" fill sizes="(min-width: 1024px) 44vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" priority />
+              <div className="group relative rounded-[2.2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_34px_100px_rgba(47,111,115,0.18)]">
+                <div className="absolute -right-5 -top-5 h-24 w-24 rounded-full border border-[#c9ad69]/35" />
+                <div className="relative min-h-[380px] overflow-hidden rounded-[1.7rem] sm:min-h-[560px]">
+                  <Image src="/images/fachada.jpg" alt="Fachada do Centro SER em Piracicaba" fill sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" priority />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.34))]" />
-                  <div className="absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/35 bg-white/90 p-4 shadow-[0_18px_50px_rgba(32,61,61,0.18)] backdrop-blur-md sm:left-6 sm:right-auto sm:w-[20rem]">
+                  <div className="absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/40 bg-white/90 p-4 shadow-[0_18px_50px_rgba(32,61,61,0.18)] backdrop-blur-md sm:left-6 sm:right-auto sm:w-[21rem]">
                     <p className="flex items-center gap-2 text-sm font-extrabold text-[#2f6f73]">
                       <MapPin size={16} /> Piracicaba/SP
                     </p>
-                    <div className="mt-3 grid grid-cols-3 gap-2 text-center text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#5f594f]">
-                      <span className="rounded-full bg-[#edf5f3] px-2 py-2">Presencial</span>
-                      <span className="rounded-full bg-[#f8efe1] px-2 py-2">Online</span>
-                      <span className="rounded-full bg-[#edf5f3] px-2 py-2">Domiciliar</span>
-                    </div>
+                    <p className="mt-2 text-sm font-bold text-[#5f594f]">Presencial • Online • Domiciliar</p>
                   </div>
                 </div>
               </div>
@@ -235,8 +245,12 @@ export default function LandingPage({ faqs }: LandingPageProps) {
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#625d54]">
                 O Centro SER integra Psicologia, Educação Especial e cuidado humanizado para apoiar saúde emocional, aprendizagem, desenvolvimento e qualidade de vida. Cada atendimento é conduzido com delicadeza, ciência e respeito à singularidade de cada pessoa.
               </p>
-              <div className="mt-10 grid gap-5 sm:grid-cols-3">
-                {carePillars.map(({ title, text, icon: Icon }) => (
+              <div className="mt-10 grid gap-6 sm:grid-cols-3">
+                {[
+                  { title: "Acolhimento", text: "Escuta qualificada e presença.", icon: HeartHandshake },
+                  { title: "Ética", text: "Cuidado profissional e sigiloso.", icon: ShieldCheck },
+                  { title: "Singularidade", text: "Um olhar para cada história.", icon: Sparkles },
+                ].map(({ title, text, icon: Icon }) => (
                   <div key={title} className="border-t border-[#d9c58b] pt-5">
                     <Icon className="text-[#2f6f73]" size={24} />
                     <h3 className="mt-4 font-serif text-2xl text-[#292620]">{title}</h3>
@@ -245,45 +259,46 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 ))}
               </div>
             </div>
-            <div className="group rounded-[2rem] border border-[#eadfcd] bg-[#fbf8f1] p-3 shadow-[0_24px_70px_rgba(45,63,61,0.1)]">
-              <div className="relative min-h-[380px] overflow-hidden rounded-[1.55rem] sm:min-h-[520px]">
-                <Image src="/images/consultorio-1.jpg" alt="Consultório acolhedor do Centro SER" fill sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.03]" />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0),rgba(32,61,61,0.12))]" />
-              </div>
-            </div>
+
+            <EditorialImage src="/images/consultorio-1.jpg" alt="Consultório acolhedor do Centro SER" className="min-h-[420px] lg:min-h-[560px]" />
           </div>
         </section>
 
-        <section className="bg-[#fbf8f1]">
+        <section className="relative overflow-hidden bg-[#fbf8f1]">
+          <div className="pointer-events-none absolute left-0 top-20 h-64 w-64 rounded-full bg-[#8bbac1]/12 blur-3xl" />
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
             <div className="max-w-3xl">
               <Eyebrow>Duas frentes de cuidado</Eyebrow>
               <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Um mesmo propósito: olhar para cada pessoa de forma integral
+                Dois pilares fortes, um mesmo olhar integral
               </h2>
             </div>
+
             <div className="mt-12 grid gap-6 lg:grid-cols-2">
               <article className="rounded-[2rem] border border-[#dbe8e6] bg-[#edf5f3] p-7 shadow-[0_22px_60px_rgba(45,63,61,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_75px_rgba(47,111,115,0.13)] sm:p-9">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#2f6f73]">
                   <Brain size={24} />
                 </div>
-                <h3 className="mt-6 font-serif text-3xl text-[#283f3f]">Espaço NeuroAfetivo</h3>
+                <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Espaço NeuroAfetivo</p>
+                <h3 className="mt-2 font-serif text-3xl text-[#283f3f]">Psicoterapia TCC com olhar neuroafetivo</h3>
                 <p className="mt-4 leading-7 text-[#56615e]">
-                  Psicoterapia TCC com olhar acolhedor para crianças, adolescentes, adultos e idosos.
+                  Atendimento para crianças, adolescentes, adultos e idosos, integrando saúde emocional, aprendizagem e vínculos familiares.
                 </p>
                 <ul className="mt-7 grid gap-3">
-                  {["Psicoterapia infantil e infanto-juvenil", "Ansiedade, depressão, luto e regulação emocional", "Autoconhecimento e saúde mental", "Apoio psicopedagógico e reforço especializado", "Orientação familiar e suporte a neurodivergências"].map((item) => (
+                  {["Psicoterapia infantil e infanto-juvenil", "Ansiedade, depressão, luto e regulação emocional", "Autoconhecimento e saúde mental", "Apoio psicopedagógico e reforço especializado", "Orientação familiar e neurodivergências"].map((item) => (
                     <Bullet key={item}>{item}</Bullet>
                   ))}
                 </ul>
               </article>
-              <article className="rounded-[2rem] border border-[#eadbb9] bg-[#f8efe1] p-7 shadow-[0_22px_60px_rgba(92,74,37,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_75px_rgba(154,122,51,0.13)] sm:p-9">
+
+              <article id="integravida" className="rounded-[2rem] border border-[#eadbb9] bg-[#f8efe1] p-7 shadow-[0_22px_60px_rgba(92,74,37,0.08)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_75px_rgba(154,122,51,0.13)] sm:p-9">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#9b7a33]">
                   <Home size={24} />
                 </div>
-                <h3 className="mt-6 font-serif text-3xl text-[#4a3c23]">IntegraVida</h3>
+                <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.22em] text-[#2f6f73]">IntegraVida</p>
+                <h3 className="mt-2 font-serif text-3xl text-[#4a3c23]">Cuidado domiciliar, autonomia e bem-estar</h3>
                 <p className="mt-4 leading-7 text-[#625848]">
-                  Atendimento domiciliar humanizado para idosos, pessoas com mobilidade reduzida e pessoas com deficiência.
+                  Uma frente humana para idosos, pessoas com mobilidade reduzida e pessoas com deficiência, respeitando rotina e família.
                 </p>
                 <ul className="mt-7 grid gap-3">
                   {["Cuidado no ambiente familiar", "Apoio à autonomia e ao bem-estar", "Suporte psicomotor", "Prevenção de quedas", "Acolhimento e orientação à família"].map((item) => (
@@ -304,12 +319,13 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                   Cuidado organizado para cada fase da vida
                 </h2>
               </div>
-              <WhatsAppButton>Agendar uma conversa</WhatsAppButton>
+              <PremiumButton>Agendar uma conversa</PremiumButton>
             </div>
+
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {serviceCards.map(({ title, text, icon: Icon }) => (
+              {services.map(({ title, text, icon: Icon }) => (
                 <article key={title} className="rounded-[1.5rem] border border-[#eadfcd] bg-[#fffdf8] p-6 shadow-[0_14px_40px_rgba(45,63,61,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d8c078] hover:shadow-[0_22px_58px_rgba(47,111,115,0.11)]">
-                  <Icon className="text-[#2f6f73]" size={24} />
+                  <Icon className="text-[#2f6f73] transition duration-300" size={22} />
                   <h3 className="mt-5 text-lg font-extrabold text-[#302d27]">{title}</h3>
                   <p className="mt-3 text-sm leading-6 text-[#676157]">{text}</p>
                 </article>
@@ -320,7 +336,8 @@ export default function LandingPage({ faqs }: LandingPageProps) {
 
         <section id="silvia" className="bg-[#fbf8f1]">
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.82fr_1fr] lg:px-8 lg:py-28">
-            <div className="rounded-[2rem] border border-[#eadfcd] bg-white p-8 shadow-[0_24px_70px_rgba(45,63,61,0.1)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_82px_rgba(47,111,115,0.12)]">
+            <div className="relative rounded-[2rem] border border-[#eadfcd] bg-white p-8 shadow-[0_24px_70px_rgba(45,63,61,0.1)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_82px_rgba(47,111,115,0.12)]">
+              <div className="absolute right-8 top-8 h-20 w-20 rounded-full border border-[#d8c078]/40" />
               <div className="relative mx-auto h-28 w-64 max-w-full">
                 <Image src="/images/marca-dagua.png" alt="Marca Centro SER" fill sizes="256px" className="object-contain" />
               </div>
@@ -330,6 +347,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 <p className="mt-2 text-[#5f594f]">Psicóloga TCC • Pedagoga • Especialista em Educação Inclusiva</p>
               </div>
             </div>
+
             <div>
               <Eyebrow>Silvia Tamborim</Eyebrow>
               <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
@@ -339,7 +357,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 Com mais de 25 anos de experiência nas áreas da educação, educação especial e cuidado humano, Silvia une Psicologia TCC, prática pedagógica e inclusão para oferecer um atendimento sensível, técnico e profundamente respeitoso.
               </p>
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {["Psicóloga TCC", "Pedagoga", "Especialista em Educação Inclusiva", "Mais de 25 anos de experiência", "CRP 06/213394", "Atendimento presencial, online e domiciliar"].map((item) => (
+                {["Psicóloga TCC", "Pedagoga", "Especialista em Educação Inclusiva", "Mais de 25 anos de experiência", "CRP 06/213394", "Crianças, adolescentes, adultos e idosos"].map((item) => (
                   <div key={item} className="rounded-2xl border border-[#eadfcd] bg-white px-5 py-4 text-sm font-extrabold text-[#3d3932]">
                     {item}
                   </div>
@@ -360,24 +378,21 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 Fotos reais do espaço, pensado para oferecer conforto, tranquilidade e privacidade durante o atendimento.
               </p>
             </div>
-            <div className="mt-12 grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="rounded-[2rem] border border-[#eadfcd] bg-[#fbf8f1] p-3 shadow-[0_24px_70px_rgba(45,63,61,0.1)]">
-                <div className="relative min-h-[420px] overflow-hidden rounded-[1.55rem]">
-                    <Image src="/images/consultorio-1.jpg" alt="Sala de atendimento do Centro SER" fill sizes="(min-width: 1024px) 58vw, 92vw" className="object-cover transition duration-700 hover:scale-[1.03]" />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0),rgba(32,61,61,0.13))]" />
-                </div>
-              </div>
-              <div className="rounded-[2rem] border border-[#eadfcd] bg-[#fbf8f1] p-3 shadow-[0_24px_70px_rgba(45,63,61,0.1)]">
-                <div className="relative min-h-[420px] overflow-hidden rounded-[1.55rem]">
-                    <Image src="/images/fachada.jpg" alt="Fachada do Centro SER" fill sizes="(min-width: 1024px) 38vw, 92vw" className="object-cover transition duration-700 hover:scale-[1.03]" />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0),rgba(32,61,61,0.14))]" />
+
+            <div className="mt-12 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
+              <EditorialImage src="/images/consultorio-1.jpg" alt="Sala de atendimento do Centro SER" className="min-h-[440px]" />
+              <div className="grid gap-5">
+                <EditorialImage src="/images/fachada.jpg" alt="Fachada do Centro SER" className="min-h-[260px]" />
+                <div className="rounded-[2rem] border border-[#eadfcd] bg-[#fbf8f1] p-7 shadow-[0_20px_60px_rgba(47,111,115,0.08)]">
+                  <p className="font-serif text-2xl leading-8 text-[#2f6f73]">Arquitetura simples, privacidade e detalhes pensados para um cuidado tranquilo.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="localizacao" className="bg-[#fbf8f1]">
+        <section id="localizacao" className="relative overflow-hidden bg-[#fbf8f1]">
+          <div className="pointer-events-none absolute right-[-6rem] top-10 h-72 w-72 rounded-full bg-[#c9ad69]/12 blur-3xl" />
           <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.75fr_1fr] lg:px-8 lg:py-28">
             <div>
               <Eyebrow>Localização</Eyebrow>
@@ -391,11 +406,9 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 <MapPin className="text-[#2f6f73]" />
                 <p className="mt-4 text-lg font-extrabold text-[#302d27]">Rua Alfredo Guedes, 615 - Bairro Alto, Piracicaba/SP</p>
               </div>
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }} className="mt-7">
-                <Link href={maps} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#c9ad69] bg-white px-6 py-3 text-sm font-bold text-[#354745] shadow-sm transition hover:bg-[#fffdf8]">
-                  Abrir no Google Maps <ArrowRight size={18} aria-hidden="true" />
-                </Link>
-              </motion.div>
+              <div className="mt-7">
+                <PremiumButton href={maps} variant="secondary">Abrir no Google Maps</PremiumButton>
+              </div>
             </div>
             <div className="rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_24px_70px_rgba(45,63,61,0.1)]">
               <iframe
@@ -409,17 +422,19 @@ export default function LandingPage({ faqs }: LandingPageProps) {
           </div>
         </section>
 
-        <section className="bg-white px-4 py-10 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#203d3d] px-6 py-14 text-center shadow-[0_30px_90px_rgba(32,61,61,0.26)] sm:px-10 lg:px-16">
-            <p className="text-sm font-extrabold uppercase tracking-[0.24em] text-[#d8c078]">Centro SER</p>
-            <h2 className="mx-auto mt-4 max-w-3xl font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl">
+        <section className="bg-white px-4 py-12 sm:px-6 lg:px-8">
+          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.2rem] bg-[#203d3d] px-6 py-16 text-center shadow-[0_30px_90px_rgba(32,61,61,0.26)] sm:px-10 lg:px-16">
+            <div className="pointer-events-none absolute left-[-4rem] top-[-4rem] h-56 w-56 rounded-full bg-[#8bbac1]/14 blur-3xl" />
+            <div className="pointer-events-none absolute bottom-6 right-10 hidden h-28 w-28 rounded-full border border-[#d8c078]/35 lg:block" />
+            <Eyebrow light>Centro SER</Eyebrow>
+            <h2 className="mx-auto mt-5 max-w-3xl font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl">
               Cuidar é integrar corpo, mente e afeto.
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#edf5f3]">
               Agende uma conversa e conheça um espaço dedicado ao acolhimento, ao desenvolvimento humano e à saúde emocional.
             </p>
             <div className="mt-8 flex justify-center">
-              <WhatsAppButton large>Falar pelo WhatsApp</WhatsAppButton>
+              <PremiumButton large>Falar pelo WhatsApp</PremiumButton>
             </div>
           </div>
         </section>
