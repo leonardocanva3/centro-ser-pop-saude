@@ -8,19 +8,66 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-playfair);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: clip;
+}
+
+@layer components {
+  .section {
+    @apply mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28;
+  }
+
+  .section-label {
+    @apply inline-flex rounded-full border border-[#d7c28b]/50 bg-white/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-[#9c7d36] shadow-sm;
+  }
+
+  .section-title {
+    @apply mt-4 font-serif text-3xl font-semibold leading-tight text-[#282620] sm:text-4xl lg:text-5xl;
+  }
+
+  .section-text {
+    @apply mt-5 text-base leading-8 text-[#625d54] sm:text-lg;
+  }
+
+  .premium-card {
+    @apply rounded-3xl border border-[#e8dec8] bg-white/86 shadow-[0_18px_50px_rgba(45,63,61,0.08)] backdrop-blur;
+  }
+
+  .shadow-premium {
+    box-shadow: 0 26px 70px rgba(45, 63, 61, 0.14);
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#2f6f73] px-6 py-3 text-sm font-bold text-white shadow-[0_14px_32px_rgba(47,111,115,0.25)] transition hover:-translate-y-0.5 hover:bg-[#285f62] focus:outline-none focus:ring-2 focus:ring-[#2f6f73] focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[#cdb578] bg-white/78 px-6 py-3 text-sm font-bold text-[#3a4745] shadow-sm transition hover:-translate-y-0.5 hover:border-[#b28b3d] hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#caa75e] focus:ring-offset-2;
+  }
+
+  .icon-link {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#e1d8c5] bg-white/80 text-[#2f6f73] shadow-sm transition hover:-translate-y-0.5 hover:border-[#caa75e] hover:text-[#9c7d36] focus:outline-none focus:ring-2 focus:ring-[#caa75e] focus:ring-offset-2;
+  }
+
+  .gallery-tile {
+    @apply relative overflow-hidden rounded-[1.5rem] border border-[#e8dec8] bg-white;
+    box-shadow: 0 26px 70px rgba(45, 63, 61, 0.14);
+  }
 }

@@ -1,65 +1,151 @@
-import Image from "next/image";
+import LandingPage from "@/components/LandingPage";
+
+const siteUrl = "https://centro-ser-pop-saude.vercel.app";
+const instagram = "https://www.instagram.com/centro_ser_espaco_neuroafetivo/";
+const maps =
+  "https://www.google.com/maps/place/Centro+SER+-+Espa%C3%A7o+NeuroAfetivo+%7C+Psicologia/@-22.7258325,-47.6405004,17z/data=!4m15!1m8!3m7!1s0x94c631bb05bfb8b7:0xcbe8c4189de56a26!2sCentro+SER+-+Espa%C3%A7o+NeuroAfetivo+%7C+Psicologia!8m2!3d-22.7258872!4d-47.6403628!10e5!16s%2Fg%2F11zbcyk3bx!3m5!1s0x94c631bb05bfb8b7:0xcbe8c4189de56a26!8m2!3d-22.7258872!4d-47.6403628!16s%2Fg%2F11zbcyk3bx?authuser=0&entry=ttu&g_ep=EgoyMDI2MDYyMi4wIKXMDSoASAFQAw%3D%3D";
+
+const services = [
+  "Psicoterapia Infantil",
+  "Psicoterapia para Adolescentes",
+  "Psicoterapia para Adultos",
+  "Psicoterapia para Idosos",
+  "Terapia Cognitivo-Comportamental",
+  "Reforço Escolar Especializado",
+  "Apoio Psicopedagógico",
+  "Atendimento a Crianças Neurodivergentes",
+  "Atendimento Online",
+  "Atendimento Domiciliar Humanizado",
+  "Atendimento para Idosos",
+  "Atendimento para Pessoas com Mobilidade Reduzida",
+  "Atendimento para Pessoas com Deficiência",
+];
+
+const faqs = [
+  {
+    question: "O Centro SER atende crianças?",
+    answer:
+      "Sim. O Centro SER realiza atendimento infantil com olhar acolhedor, recursos lúdicos e abordagem voltada ao desenvolvimento emocional, social e familiar.",
+  },
+  {
+    question: "Há atendimento para adolescentes e adultos?",
+    answer:
+      "Sim. São realizados atendimentos para adolescentes, adultos e idosos, com psicoterapia baseada na Terapia Cognitivo-Comportamental (TCC).",
+  },
+  {
+    question: "O Centro SER oferece atendimento online?",
+    answer:
+      "Sim. Além dos atendimentos presenciais, também há possibilidade de atendimento online conforme a necessidade de cada caso.",
+  },
+  {
+    question: "O que é o IntegraVida?",
+    answer:
+      "O IntegraVida é uma frente de atendimento domiciliar humanizado voltada principalmente para idosos, pessoas com mobilidade reduzida e pessoas com deficiência.",
+  },
+  {
+    question: "O Centro SER atende crianças neurodivergentes?",
+    answer:
+      "Sim. O Centro SER oferece acolhimento e suporte especializado a crianças neurodivergentes, integrando Psicologia, Educação Inclusiva e orientação familiar.",
+  },
+  {
+    question: "Como agendar um atendimento?",
+    answer: "O agendamento pode ser feito diretamente pelo WhatsApp: (19) 99604-4947.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["LocalBusiness", "MedicalBusiness", "ProfessionalService"],
+      "@id": `${siteUrl}/#centro-ser`,
+      name: "Centro SER - Espaco NeuroAfetivo & IntegraVida",
+      alternateName: "Centro SER Piracicaba",
+      url: siteUrl,
+      image: [`${siteUrl}/images/logo-centro-ser.png`, `${siteUrl}/images/fachada.jpg`],
+      logo: `${siteUrl}/images/logo-centro-ser.png`,
+      description:
+        "Centro SER - Espaco NeuroAfetivo & IntegraVida em Piracicaba/SP. Psicologia TCC, educacao inclusiva e atendimento domiciliar humanizado.",
+      telephone: "+55 19 99604-4947",
+      email: "psi.silviatamborim@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Rua Alfredo Guedes, 615 - Bairro Alto",
+        addressLocality: "Piracicaba",
+        addressRegion: "SP",
+        addressCountry: "BR",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: -22.7258872,
+        longitude: -47.6403628,
+      },
+      hasMap: maps,
+      sameAs: [instagram],
+      areaServed: "Piracicaba/SP",
+      medicalSpecialty: ["Psychology", "MentalHealth"],
+      makesOffer: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service,
+        },
+      })),
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#silvia-tamborim`,
+      name: "Silvia Helena Tamborim",
+      jobTitle: "Psicologa TCC, Pedagoga e Especialista em Educacao Inclusiva",
+      affiliation: {
+        "@id": `${siteUrl}/#centro-ser`,
+      },
+      telephone: "+55 19 99604-4947",
+      email: "psi.silviatamborim@gmail.com",
+      knowsAbout: [
+        "Terapia Cognitivo-Comportamental",
+        "Educacao Inclusiva",
+        "TEA",
+        "Neurodivergencias",
+        "Atendimento domiciliar",
+        "Orientacao familiar",
+      ],
+      identifier: "CRP 06/213394",
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "Centro SER - Espaco NeuroAfetivo & IntegraVida",
+      url: siteUrl,
+      publisher: {
+        "@id": `${siteUrl}/#centro-ser`,
+      },
+    },
+  ],
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <LandingPage faqs={faqs} />
+    </>
   );
 }
