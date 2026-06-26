@@ -40,7 +40,7 @@ const nav = [
   ["Centro SER", "#centro"],
   ["Atendimentos", "#atendimentos"],
   ["IntegraVida", "#integravida"],
-  ["Silvia", "#silvia"],
+  ["Profissional Responsável", "#silvia"],
   ["Localização", "#localizacao"],
 ] as const;
 
@@ -52,6 +52,11 @@ const services = [
   { title: "TCC", text: "Prática clínica baseada em evidências.", icon: Stethoscope },
   { title: "Reforço especializado", text: "Apoio pedagógico com olhar inclusivo.", icon: GraduationCap },
   { title: "Neurodivergências", text: "Suporte a crianças, famílias e educadores.", icon: Sparkles },
+  {
+    title: "Avaliação Neuropsicológica",
+    text: "Investigação cognitiva, emocional e comportamental com neuropsicólogo parceiro.",
+    icon: Brain,
+  },
   { title: "Domiciliar", text: "Atendimento humanizado no ambiente familiar.", icon: Home },
 ];
 
@@ -71,7 +76,7 @@ function PremiumButton({
   large?: boolean;
 }) {
   const base =
-    "group relative inline-flex items-center justify-center overflow-hidden rounded-full font-extrabold transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#2f6f73] focus:ring-offset-2";
+    "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full whitespace-nowrap font-extrabold leading-none transition duration-300 focus:outline-none focus:ring-2 focus:ring-[#2f6f73] focus:ring-offset-2";
   const size = large ? "min-h-14 px-8 py-4 text-base" : "min-h-12 px-6 py-3 text-sm";
   const style =
     variant === "primary"
@@ -114,17 +119,21 @@ function EditorialImage({
   src,
   alt,
   className = "",
+  imageClassName = "object-cover",
+  innerClassName = "",
   priority = false,
 }: {
   src: string;
   alt: string;
   className?: string;
+  imageClassName?: string;
+  innerClassName?: string;
   priority?: boolean;
 }) {
   return (
-    <div className={`group relative overflow-hidden rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_30px_90px_rgba(47,111,115,0.13)] ${className}`}>
-      <div className="relative h-full min-h-[320px] overflow-hidden rounded-[1.55rem]">
-        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" priority={priority} />
+    <div className={`group relative flex overflow-hidden rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_30px_90px_rgba(47,111,115,0.13)] ${className}`}>
+      <div className={`relative min-h-[320px] flex-1 overflow-hidden rounded-[1.55rem] ${innerClassName}`}>
+        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 48vw, 92vw" className={`${imageClassName} transition duration-700 group-hover:scale-[1.025]`} priority={priority} />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.18))]" />
       </div>
     </div>
@@ -137,21 +146,21 @@ export default function LandingPage({ faqs }: LandingPageProps) {
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#fbf8f1] text-[#2f2c27]">
       <header className="sticky top-0 z-50 border-b border-[#eadfcd]/80 bg-[#fffdf8]/88 shadow-[0_12px_42px_rgba(47,111,115,0.06)] backdrop-blur-2xl">
-        <div className="mx-auto flex min-h-[92px] max-w-7xl items-center justify-between gap-5 px-4 sm:px-6 lg:min-h-[104px] lg:px-8">
-          <Link href="#inicio" className="relative h-16 w-48 shrink-0 sm:h-20 sm:w-60 lg:h-24 lg:w-72" aria-label="Ir para o início">
+        <div className="mx-auto flex min-h-[88px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:min-h-[96px] lg:px-8">
+          <Link href="#inicio" className="relative h-16 w-48 shrink-0 sm:h-20 sm:w-60 xl:h-[4.75rem] xl:w-64" aria-label="Ir para o início">
             <Image src="/images/marca-dagua.png" alt="Logo Centro SER Espaço NeuroAfetivo" fill sizes="(min-width: 1024px) 288px, (min-width: 640px) 240px, 192px" className="object-contain object-left" priority />
           </Link>
 
-          <nav className="hidden items-center gap-7 xl:flex" aria-label="Navegação principal">
+          <nav className="hidden flex-1 items-center justify-center gap-5 xl:flex" aria-label="Navegação principal">
             {nav.map(([label, href]) => (
-              <Link key={label} href={href} className="group relative pb-2 text-[0.78rem] font-extrabold text-[#2f6f73] transition duration-300 hover:text-[#245d61]">
+              <Link key={label} href={href} className="group relative inline-flex h-12 items-center whitespace-nowrap px-1 text-center text-[0.74rem] font-extrabold leading-none text-[#2f6f73] transition duration-300 hover:text-[#245d61]">
                 {label}
-                <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-[#c9ad69] transition duration-300 group-hover:scale-x-100" />
+                <span className="absolute inset-x-0 bottom-1 h-px origin-left scale-x-0 bg-[#c9ad69] transition duration-300 group-hover:scale-x-100" />
               </Link>
             ))}
           </nav>
 
-          <div className="hidden items-center gap-3 lg:flex">
+          <div className="hidden shrink-0 items-center gap-3 lg:flex">
             <Link href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram do Centro SER" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#e1d6c3] bg-white/82 text-[#2f6f73] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#c9ad69] hover:text-[#9b7a33]">
               <FaInstagram />
             </Link>
@@ -260,7 +269,13 @@ export default function LandingPage({ faqs }: LandingPageProps) {
               </div>
             </div>
 
-            <EditorialImage src="/images/consultorio-1.jpg" alt="Consultório acolhedor do Centro SER" className="min-h-[420px] lg:min-h-[560px]" />
+            <EditorialImage
+              src="/images/consultorio-1.jpg"
+              alt="Consultório acolhedor do Centro SER"
+              className="min-h-[420px] lg:min-h-[560px]"
+              imageClassName="object-cover object-center"
+              innerClassName="min-h-[420px] lg:min-h-[536px]"
+            />
           </div>
         </section>
 
@@ -284,6 +299,13 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 <p className="mt-4 leading-7 text-[#56615e]">
                   Atendimento para crianças, adolescentes, adultos e idosos, integrando saúde emocional, aprendizagem e vínculos familiares.
                 </p>
+                <div className="mt-6 rounded-[1.35rem] border border-[#d8c078]/70 bg-white/82 p-4 shadow-[0_16px_42px_rgba(47,111,115,0.08)]">
+                  <span className="inline-flex rounded-full bg-[#2f6f73] px-3 py-1 text-[0.66rem] font-extrabold uppercase tracking-[0.2em] text-white">
+                    NOVO
+                  </span>
+                  <p className="mt-3 font-serif text-2xl leading-8 text-[#283f3f]">Avaliação Neuropsicológica</p>
+                  <p className="mt-1 text-sm font-bold leading-6 text-[#56615e]">Realizada por Neuropsicólogo Parceiro.</p>
+                </div>
                 <ul className="mt-7 grid gap-3">
                   {["Psicoterapia infantil e infanto-juvenil", "Ansiedade, depressão, luto e regulação emocional", "Autoconhecimento e saúde mental", "Apoio psicopedagógico e reforço especializado", "Orientação familiar e neurodivergências"].map((item) => (
                     <Bullet key={item}>{item}</Bullet>
@@ -335,35 +357,85 @@ export default function LandingPage({ faqs }: LandingPageProps) {
         </section>
 
         <section id="silvia" className="bg-[#fbf8f1]">
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.82fr_1fr] lg:px-8 lg:py-28">
-            <div className="relative rounded-[2rem] border border-[#eadfcd] bg-white p-8 shadow-[0_24px_70px_rgba(45,63,61,0.1)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_82px_rgba(47,111,115,0.12)]">
-              <div className="absolute right-8 top-8 h-20 w-20 rounded-full border border-[#d8c078]/40" />
-              <div className="relative mx-auto h-28 w-64 max-w-full">
-                <Image src="/images/marca-dagua.png" alt="Marca Centro SER" fill sizes="256px" className="object-contain" />
-              </div>
-              <div className="mt-8 rounded-[1.5rem] bg-[#edf5f3] p-6">
-                <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-[#9b7a33]">Profissional responsável</p>
-                <h3 className="mt-3 font-serif text-3xl text-[#283f3f]">Silvia Helena Tamborim</h3>
-                <p className="mt-2 text-[#5f594f]">Psicóloga TCC • Pedagoga • Especialista em Educação Inclusiva</p>
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.92fr_1fr] lg:px-8 lg:py-28">
+            <div className="relative">
+              <div className="absolute -left-5 top-10 hidden h-28 w-28 rounded-full border border-[#d8c078]/35 lg:block" />
+              <EditorialImage
+                src="/images/silvia-retrato-principal.jpeg"
+                alt="Retrato profissional de Silvia Helena Tamborim"
+                className="min-h-[560px] bg-[#fffdf8] lg:min-h-[700px]"
+                imageClassName="object-contain object-top"
+                innerClassName="min-h-[536px] bg-[#f6efe5] lg:min-h-[676px]"
+                priority
+              />
+              <div className="relative ml-auto mr-4 -mt-14 max-w-sm rounded-[1.45rem] border border-[#dbc487] bg-[#fffdf8]/95 p-5 shadow-[0_20px_55px_rgba(92,74,37,0.13)] backdrop-blur">
+                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Profissional responsável</p>
+                <p className="mt-2 font-serif text-2xl leading-8 text-[#2f6f73]">CRP 06/213394</p>
               </div>
             </div>
 
             <div>
-              <Eyebrow>Silvia Tamborim</Eyebrow>
+              <Eyebrow>Profissional Responsável</Eyebrow>
               <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Autoridade clínica com escuta humana e trajetória em educação inclusiva
+                Silvia Helena Tamborim
               </h2>
-              <p className="mt-6 text-lg leading-8 text-[#625d54]">
-                Com mais de 25 anos de experiência nas áreas da educação, educação especial e cuidado humano, Silvia une Psicologia TCC, prática pedagógica e inclusão para oferecer um atendimento sensível, técnico e profundamente respeitoso.
-              </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {["Psicóloga TCC", "Pedagoga", "Especialista em Educação Inclusiva", "Mais de 25 anos de experiência", "CRP 06/213394", "Crianças, adolescentes, adultos e idosos"].map((item) => (
-                  <div key={item} className="rounded-2xl border border-[#eadfcd] bg-white px-5 py-4 text-sm font-extrabold text-[#3d3932]">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Psicóloga Clínica",
+                  "CRP 06/213394",
+                  "Especialista em Terapia Cognitivo-Comportamental",
+                  "Pedagoga",
+                  "Especialista em Educação Inclusiva",
+                  "Mais de 25 anos de experiência",
+                ].map((item) => (
+                  <div key={item} className="rounded-2xl border border-[#eadfcd] bg-white px-5 py-4 text-sm font-extrabold leading-6 text-[#3d3932] shadow-[0_12px_32px_rgba(45,63,61,0.05)]">
                     {item}
                   </div>
                 ))}
               </div>
+              <p className="mt-8 text-lg leading-8 text-[#625d54]">
+                Silvia conduz um trabalho clínico marcado por escuta, ética e precisão técnica. Sua trajetória integra Psicologia, Terapia Cognitivo-Comportamental, Pedagogia e Educação Inclusiva para construir planos de cuidado sensíveis à história, ao contexto familiar e às necessidades de cada pessoa.
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#625d54]">
+                No Centro SER, sua atuação une acolhimento e método, oferecendo um acompanhamento humanizado para desenvolvimento emocional, aprendizagem, autonomia e qualidade de vida.
+              </p>
             </div>
+          </div>
+
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1fr_0.92fr] lg:px-8 lg:pb-28">
+            <div>
+              <Eyebrow>Formação e Experiência</Eyebrow>
+              <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
+                Formação sólida para um cuidado completo e confiável
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-[#625d54]">
+                Uma atuação construída na interseção entre saúde mental, educação e inclusão, com repertório para acolher demandas clínicas, familiares, escolares e domiciliares com segurança, clareza e responsabilidade.
+              </p>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {[
+                  "Psicóloga Clínica",
+                  "Pedagoga",
+                  "Especialista em Educação Inclusiva",
+                  "Terapia Cognitivo-Comportamental",
+                  "Atendimento Presencial",
+                  "Atendimento Online",
+                  "Atendimento Domiciliar",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#eadfcd] bg-white px-5 py-4 text-sm font-extrabold text-[#3d3932] shadow-[0_12px_32px_rgba(45,63,61,0.05)]">
+                    <Check className="shrink-0 text-[#b28b3d]" size={17} />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <EditorialImage
+              src="/images/silvia-formacao-experiencia.jpeg"
+              alt="Silvia Helena Tamborim em ambiente profissional"
+              className="min-h-[540px] bg-[#fffdf8] lg:min-h-[660px]"
+              imageClassName="object-contain object-top"
+              innerClassName="min-h-[516px] bg-[#f6efe5] lg:min-h-[636px]"
+            />
           </div>
         </section>
 

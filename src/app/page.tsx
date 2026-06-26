@@ -14,6 +14,7 @@ const services = [
   "Reforço Escolar Especializado",
   "Apoio Psicopedagógico",
   "Atendimento a Crianças Neurodivergentes",
+  "Avaliação Neuropsicológica",
   "Atendimento Online",
   "Atendimento Domiciliar Humanizado",
   "Atendimento para Idosos",
