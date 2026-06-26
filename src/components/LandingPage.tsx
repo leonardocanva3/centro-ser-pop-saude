@@ -140,6 +140,42 @@ function EditorialImage({
   );
 }
 
+function FramedPhoto({
+  src,
+  alt,
+  width,
+  height,
+  className = "",
+  priority = false,
+  children,
+}: {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className?: string;
+  priority?: boolean;
+  children?: ReactNode;
+}) {
+  return (
+    <div className={`group relative rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_30px_90px_rgba(47,111,115,0.13)] ${className}`}>
+      <div className="relative overflow-hidden rounded-[1.55rem] bg-[#f6efe5]">
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          sizes="(min-width: 1024px) 48vw, 92vw"
+          className="h-auto w-full object-contain object-top transition duration-700 group-hover:scale-[1.018]"
+          priority={priority}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.16))]" />
+      </div>
+      {children}
+    </div>
+  );
+}
+
 export default function LandingPage({ faqs }: LandingPageProps) {
   void faqs;
 
@@ -360,18 +396,18 @@ export default function LandingPage({ faqs }: LandingPageProps) {
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.92fr_1fr] lg:px-8 lg:py-28">
             <div className="relative">
               <div className="absolute -left-5 top-10 hidden h-28 w-28 rounded-full border border-[#d8c078]/35 lg:block" />
-              <EditorialImage
+              <FramedPhoto
                 src="/images/silvia-retrato-principal.jpeg"
                 alt="Retrato profissional de Silvia Helena Tamborim"
-                className="min-h-[560px] bg-[#fffdf8] lg:min-h-[700px]"
-                imageClassName="object-contain object-top"
-                innerClassName="min-h-[536px] bg-[#f6efe5] lg:min-h-[676px]"
+                width={718}
+                height={710}
                 priority
-              />
-              <div className="relative ml-auto mr-4 -mt-14 max-w-sm rounded-[1.45rem] border border-[#dbc487] bg-[#fffdf8]/95 p-5 shadow-[0_20px_55px_rgba(92,74,37,0.13)] backdrop-blur">
-                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Profissional responsável</p>
-                <p className="mt-2 font-serif text-2xl leading-8 text-[#2f6f73]">CRP 06/213394</p>
-              </div>
+              >
+                <div className="absolute bottom-6 left-6 right-6 rounded-[1.45rem] border border-[#dbc487] bg-[#fffdf8]/92 p-5 shadow-[0_20px_55px_rgba(92,74,37,0.16)] backdrop-blur">
+                  <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Profissional responsável</p>
+                  <p className="mt-2 font-serif text-2xl leading-8 text-[#2f6f73]">CRP 06/213394</p>
+                </div>
+              </FramedPhoto>
             </div>
 
             <div>
@@ -429,12 +465,11 @@ export default function LandingPage({ faqs }: LandingPageProps) {
               </div>
             </div>
 
-            <EditorialImage
+            <FramedPhoto
               src="/images/silvia-formacao-experiencia.jpeg"
               alt="Silvia Helena Tamborim em ambiente profissional"
-              className="min-h-[540px] bg-[#fffdf8] lg:min-h-[660px]"
-              imageClassName="object-contain object-top"
-              innerClassName="min-h-[516px] bg-[#f6efe5] lg:min-h-[636px]"
+              width={1024}
+              height={1025}
             />
           </div>
         </section>
