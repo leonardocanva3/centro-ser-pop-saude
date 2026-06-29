@@ -438,39 +438,45 @@ export default function LandingPage({ faqs }: LandingPageProps) {
             </div>
           </div>
 
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-20 sm:px-6 lg:grid-cols-[1fr_0.92fr] lg:px-8 lg:pb-28">
-            <div>
-              <Eyebrow>Formação e Experiência</Eyebrow>
-              <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Formação sólida para um cuidado completo e confiável
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-[#625d54]">
-                Uma atuação construída na interseção entre saúde mental, educação e inclusão, com repertório para acolher demandas clínicas, familiares, escolares e domiciliares com segurança, clareza e responsabilidade.
-              </p>
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                {[
-                  "Psicóloga Clínica",
-                  "Pedagoga",
-                  "Especialista em Educação Inclusiva",
-                  "Terapia Cognitivo-Comportamental",
-                  "Atendimento Presencial",
-                  "Atendimento Online",
-                  "Atendimento Domiciliar",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 rounded-2xl border border-[#eadfcd] bg-white px-5 py-4 text-sm font-extrabold text-[#3d3932] shadow-[0_12px_32px_rgba(45,63,61,0.05)]">
-                    <Check className="shrink-0 text-[#b28b3d]" size={17} />
-                    <span>{item}</span>
-                  </div>
-                ))}
+          <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 lg:pb-28">
+            <div className="relative overflow-hidden rounded-[2rem] border border-[#e7dac4] bg-[#fffdf8] px-5 py-9 shadow-[0_28px_80px_rgba(47,111,115,0.09)] sm:px-8 sm:py-11 lg:rounded-[2.5rem] lg:px-12 lg:py-14">
+              <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-[#c9ad69]/12 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-28 left-1/3 h-56 w-56 rounded-full bg-[#2f6f73]/8 blur-3xl" />
+
+              <div className="relative">
+                <Eyebrow>Formação e Experiência</Eyebrow>
+                <div className="mt-5 grid gap-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-end lg:gap-12">
+                  <h2 className="max-w-3xl font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl lg:text-[3.35rem]">
+                    Formação sólida para um cuidado completo e confiável
+                  </h2>
+                  <p className="text-lg leading-8 text-[#625d54] lg:border-l lg:border-[#d8c078]/45 lg:pl-9">
+                    Uma atuação construída na interseção entre saúde mental, educação e inclusão, com repertório para acolher demandas clínicas, familiares, escolares e domiciliares com segurança, clareza e responsabilidade.
+                  </p>
+                </div>
+
+                <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-12">
+                  {[
+                    "Psicóloga Clínica",
+                    "Pedagoga",
+                    "Especialista em Educação Inclusiva",
+                    "Terapia Cognitivo-Comportamental",
+                    "Atendimento Presencial",
+                    "Atendimento Online",
+                    "Atendimento Domiciliar",
+                  ].map((item, index) => (
+                    <div
+                      key={item}
+                      className={`group flex min-h-24 items-center gap-4 rounded-[1.35rem] border border-[#eadfcd] bg-white/90 px-5 py-5 text-sm font-extrabold leading-6 text-[#3d3932] shadow-[0_14px_38px_rgba(45,63,61,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d8c078] hover:shadow-[0_20px_48px_rgba(47,111,115,0.1)] lg:px-6 ${index < 3 ? "lg:col-span-4" : "lg:col-span-3"} ${index === 6 ? "sm:col-span-2 lg:col-span-3" : ""}`}
+                    >
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d8c078]/45 bg-[#fbf8f1] transition duration-300 group-hover:bg-[#f5eedc]">
+                        <Check className="text-[#b28b3d]" size={18} />
+                      </span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-
-            <FramedPhoto
-              src="/images/silvia-formacao-experiencia.jpeg"
-              alt="Silvia Helena Tamborim em ambiente profissional"
-              width={1024}
-              height={1025}
-            />
           </div>
         </section>
 
