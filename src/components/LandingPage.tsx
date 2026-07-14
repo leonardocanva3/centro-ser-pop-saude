@@ -31,8 +31,6 @@ type LandingPageProps = {
 
 const whatsappBase = "https://wa.me/5519996044947";
 const instagram = "https://www.instagram.com/centro_ser_espaco_neuroafetivo/";
-const maps =
-  "https://www.google.com/maps/place/Centro+SER+-+Espa%C3%A7o+NeuroAfetivo+%7C+Psicologia/@-22.7258325,-47.6405004,17z/data=!4m15!1m8!3m7!1s0x94c631bb05bfb8b7:0xcbe8c4189de56a26!2sCentro+SER+-+Espa%C3%A7o+NeuroAfetivo+%7C+Psicologia!8m2!3d-22.7258872!4d-47.6403628!10e5!16s%2Fg%2F11zbcyk3bx!3m5!1s0x94c631bb05bfb8b7:0xcbe8c4189de56a26!8m2!3d-22.7258872!4d-47.6403628!16s%2Fg%2F11zbcyk3bx?authuser=0&entry=ttu&g_ep=EgoyMDI2MDYyMi4wIKXMDSoASAFQAw%3D%3D";
 
 const nav = [
   ["Início", "#inicio"],
@@ -40,7 +38,6 @@ const nav = [
   ["Atendimentos", "#atendimentos"],
   ["IntegraVida", "#integravida"],
   ["Profissional Responsável", "#silvia"],
-  ["Localização", "#localizacao"],
 ] as const;
 
 const services = [
@@ -497,33 +494,6 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                   <p className="font-serif text-2xl leading-8 text-[#2f6f73]">Arquitetura simples, privacidade e detalhes pensados para um cuidado tranquilo.</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="localizacao" className="relative overflow-hidden bg-[#fbf8f1]">
-          <div className="pointer-events-none absolute right-[-6rem] top-10 h-72 w-72 rounded-full bg-[#c9ad69]/12 blur-3xl" />
-          <div className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.75fr_1fr] lg:px-8 lg:py-28">
-            <div>
-              <Eyebrow>Localização</Eyebrow>
-              <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Como chegar ao Centro SER
-              </h2>
-              <p className="mt-6 text-lg leading-8 text-[#625d54]">
-                Use o mapa incorporado para orientação e fale com a equipe pelo WhatsApp para confirmar o melhor formato de atendimento.
-              </p>
-              <div className="mt-7">
-                <PremiumButton href={maps} variant="secondary">Abrir no Google Maps</PremiumButton>
-              </div>
-            </div>
-            <div className="rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_24px_70px_rgba(45,63,61,0.1)]">
-              <iframe
-                title="Mapa do Centro SER em Piracicaba"
-                src="https://www.google.com/maps?q=-22.7258872,-47.6403628&z=17&output=embed"
-                className="h-[380px] w-full rounded-[1.55rem] border-0 sm:h-[480px]"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
             </div>
           </div>
         </section>
