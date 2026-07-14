@@ -29,7 +29,7 @@ export default function OpenGraphImage() {
           Psicologia, desenvolvimento humano e cuidado integral
         </div>
         <div style={{ color: "#5d584f", fontSize: 32, marginTop: 28 }}>
-          Espaço NeuroAfetivo & IntegraVida em Piracicaba/SP
+          Espaço NeuroAfetivo & IntegraVida em Piracicaba, SP
         </div>
       </div>
     ),

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Centro SER - Psicologia TCC, Educação Inclusiva e Atendimento Domiciliar em Piracicaba",
   description:
-    "Centro SER - Espaço NeuroAfetivo & IntegraVida em Piracicaba/SP. Psicologia TCC para crianças, adolescentes, adultos e idosos, reforço escolar especializado, educação inclusiva, atendimento online e atendimento domiciliar humanizado.",
+    "Centro SER - Espaço NeuroAfetivo & IntegraVida em Piracicaba, SP. Psicologia TCC para crianças, adolescentes, adultos e idosos, reforço escolar especializado, educação inclusiva, atendimento online e atendimento domiciliar humanizado.",
   keywords: [
     "psicóloga em Piracicaba",
     "psicologia infantil Piracicaba",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Centro SER - Psicologia TCC, Educação Inclusiva e Atendimento Domiciliar em Piracicaba",
     description:
-      "Espaço NeuroAfetivo & IntegraVida em Piracicaba/SP para cuidado emocional, desenvolvimento humano e atendimento domiciliar humanizado.",
+      "Espaço NeuroAfetivo & IntegraVida em Piracicaba, SP para cuidado emocional, desenvolvimento humano e atendimento domiciliar humanizado.",
     url: siteUrl,
     siteName: "Centro SER",
     locale: "pt_BR",

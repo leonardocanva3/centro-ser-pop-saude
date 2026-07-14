@@ -2,8 +2,6 @@ import LandingPage from "@/components/LandingPage";
 
 const siteUrl = "https://centro-ser-pop-saude.vercel.app";
 const instagram = "https://www.instagram.com/centro_ser_espaco_neuroafetivo/";
-const maps =
-  "https://www.google.com/maps/place/Centro+SER+-+Espa%C3%A7o+NeuroAfetivo+%7C+Psicologia/@-22.7258325,-47.6405004,17z/data=!4m15!1m8!3m7!1s0x94c631bb05bfb8b7:0xcbe8c4189de56a26!2sCentro+SER+-+Espa%C3%A7o+NeuroAfetivo+%7C+Psicologia!8m2!3d-22.7258872!4d-47.6403628!10e5!16s%2Fg%2F11zbcyk3bx!3m5!1s0x94c631bb05bfb8b7:0xcbe8c4189de56a26!8m2!3d-22.7258872!4d-47.6403628!16s%2Fg%2F11zbcyk3bx?authuser=0&entry=ttu&g_ep=EgoyMDI2MDYyMi4wIKXMDSoASAFQAw%3D%3D";
 
 const services = [
   "Psicoterapia Infantil",
@@ -66,24 +64,18 @@ const jsonLd = {
       image: [`${siteUrl}/images/logo-centro-ser.png`, `${siteUrl}/images/fachada.jpg`],
       logo: `${siteUrl}/images/logo-centro-ser.png`,
       description:
-        "Centro SER - Espaco NeuroAfetivo & IntegraVida em Piracicaba/SP. Psicologia TCC, educacao inclusiva e atendimento domiciliar humanizado.",
+        "Centro SER - Espaco NeuroAfetivo & IntegraVida em Piracicaba, SP. Psicologia TCC, educacao inclusiva e atendimento domiciliar humanizado.",
       telephone: "+55 19 99604-4947",
       email: "psi.silviatamborim@gmail.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Rua Alfredo Guedes, 615 - Bairro Alto",
-        addressLocality: "Piracicaba",
-        addressRegion: "SP",
-        addressCountry: "BR",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: -22.7258872,
-        longitude: -47.6403628,
-      },
-      hasMap: maps,
       sameAs: [instagram],
-      areaServed: "Piracicaba/SP",
+      areaServed: {
+        "@type": "City",
+        name: "Piracicaba",
+        containedInPlace: {
+          "@type": "State",
+          name: "SP",
+        },
+      },
       medicalSpecialty: ["Psychology", "MentalHealth"],
       makesOffer: services.map((service) => ({
         "@type": "Offer",

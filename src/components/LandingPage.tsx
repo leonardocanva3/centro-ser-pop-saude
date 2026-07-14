@@ -9,7 +9,6 @@ import {
   HeartHandshake,
   Home,
   Mail,
-  MapPin,
   Menu,
   ShieldCheck,
   Sparkles,
@@ -247,8 +246,8 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 </PremiumButton>
               </div>
 
-              <div className="mt-9 grid gap-3 sm:grid-cols-3">
-                {["CRP 06/213394", "Presencial, online e domiciliar", "Piracicaba/SP"].map((item) => (
+              <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {["CRP 06/213394", "Atendimento Presencial", "Atendimento Online", "Atendimento Domiciliar"].map((item) => (
                   <div key={item} className="border-l border-[#d8c79a] pl-4">
                     <p className="text-sm font-extrabold leading-6 text-[#344947]">{item}</p>
                   </div>
@@ -263,10 +262,8 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                   <Image src="/images/fachada.jpg" alt="Fachada do Centro SER em Piracicaba" fill sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" priority />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.34))]" />
                   <div className="absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/40 bg-white/90 p-4 shadow-[0_18px_50px_rgba(32,61,61,0.18)] backdrop-blur-md sm:left-6 sm:right-auto sm:w-[21rem]">
-                    <p className="flex items-center gap-2 text-sm font-extrabold text-[#2f6f73]">
-                      <MapPin size={16} /> Piracicaba/SP
-                    </p>
-                    <p className="mt-2 text-sm font-bold text-[#5f594f]">Presencial • Online • Domiciliar</p>
+                    <p className="text-sm font-extrabold text-[#2f6f73]">Atendimento Presencial</p>
+                    <p className="mt-2 text-sm font-bold text-[#5f594f]">Online • Domiciliar</p>
                   </div>
                 </div>
               </div>
@@ -513,12 +510,8 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 Como chegar ao Centro SER
               </h2>
               <p className="mt-6 text-lg leading-8 text-[#625d54]">
-                Estamos localizados em Piracicaba/SP, em um espaço acolhedor e preparado para receber você e sua família.
+                Use o mapa incorporado para orientação e fale com a equipe pelo WhatsApp para confirmar o melhor formato de atendimento.
               </p>
-              <div className="mt-8 rounded-[1.5rem] border border-[#eadfcd] bg-white p-6 shadow-[0_14px_40px_rgba(45,63,61,0.06)]">
-                <MapPin className="text-[#2f6f73]" />
-                <p className="mt-4 text-lg font-extrabold text-[#302d27]">Rua Alfredo Guedes, 615 - Bairro Alto, Piracicaba/SP</p>
-              </div>
               <div className="mt-7">
                 <PremiumButton href={maps} variant="secondary">Abrir no Google Maps</PremiumButton>
               </div>
@@ -569,7 +562,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
               </p>
             </div>
 
-            <address className="grid gap-4 not-italic">
+            <div className="grid gap-4">
               <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Contato</p>
               <Link href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-sm font-semibold text-[#4d4942] transition hover:text-[#2f6f73]">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#edf5f3] text-[#25D366] transition group-hover:scale-105"><FaWhatsapp /></span>
@@ -579,11 +572,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#edf5f3] text-[#2f6f73] transition group-hover:scale-105"><Mail size={17} /></span>
                 psi.silviatamborim@gmail.com
               </Link>
-              <Link href={maps} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-sm font-semibold leading-6 text-[#4d4942] transition hover:text-[#2f6f73]">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#edf5f3] text-[#2f6f73] transition group-hover:scale-105"><MapPin size={17} /></span>
-                Rua Alfredo Guedes, 615 - Bairro Alto, Piracicaba/SP
-              </Link>
-            </address>
+            </div>
 
             <div className="lg:text-right">
               <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Social</p>
