@@ -563,6 +563,17 @@ export default function LandingPage({ faqs }: LandingPageProps) {
             <p>© 2026 Centro SER. Todos os direitos reservados.</p>
             <p className="font-semibold text-[#2f6f73]">Cuidar é integrar corpo, mente e afeto.</p>
           </div>
+          <p className="pt-4 text-center text-[0.65rem] leading-5 text-[#9a9387]">
+            Site e SEO Google feito por:{" "}
+            <Link
+              href="https://www.oleonardomachado.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#716b60] transition hover:text-[#2f6f73]"
+            >
+              www.oleonardomachado.com.br
+            </Link>
+          </p>
         </div>
       </footer>
 
