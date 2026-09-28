@@ -26,10 +26,10 @@ export default function OpenGraphImage() {
           CENTRO SER
         </div>
         <div style={{ fontSize: 78, fontWeight: 700, lineHeight: 1.05, marginTop: 24, maxWidth: 920 }}>
-          Psicologia, desenvolvimento humano e cuidado integral
+          Psicoterapia online para adultos
         </div>
         <div style={{ color: "#5d584f", fontSize: 32, marginTop: 28 }}>
-          Espaço NeuroAfetivo & IntegraVida em Piracicaba, SP
+          Sílvia Helena Tamborim • TCC • Atendimento online e presencial
         </div>
       </div>
     ),

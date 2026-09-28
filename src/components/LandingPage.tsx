@@ -2,10 +2,8 @@
 
 import { motion } from "framer-motion";
 import {
-  Baby,
   Brain,
   Check,
-  GraduationCap,
   HeartHandshake,
   Home,
   Mail,
@@ -13,7 +11,6 @@ import {
   ShieldCheck,
   Sparkles,
   Stethoscope,
-  UsersRound,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,29 +31,61 @@ const instagram = "https://www.instagram.com/centro_ser_espaco_neuroafetivo/";
 
 const nav = [
   ["Início", "#inicio"],
-  ["Centro SER", "#centro"],
-  ["Atendimentos", "#atendimentos"],
+  ["Psicoterapia Online", "#online"],
+  ["Áreas de Atuação", "#areas"],
   ["IntegraVida", "#integravida"],
-  ["Profissional Responsável", "#silvia"],
+  ["Profissional", "#silvia"],
 ] as const;
 
-const services = [
-  { title: "Psicoterapia Infantil", text: "Escuta lúdica, acolhimento e vínculo.", icon: Baby },
-  { title: "Adolescentes", text: "Apoio emocional e orientação familiar.", icon: UsersRound },
-  { title: "Adultos", text: "TCC, autoconhecimento e regulação emocional.", icon: Brain },
-  { title: "Idosos", text: "Cuidado sensível, história e autonomia.", icon: HeartHandshake },
-  { title: "TCC", text: "Prática clínica baseada em evidências.", icon: Stethoscope },
-  { title: "Reforço especializado", text: "Apoio pedagógico com olhar inclusivo.", icon: GraduationCap },
-  { title: "Neurodivergências", text: "Suporte a crianças, famílias e educadores.", icon: Sparkles },
+const adultCareAreas = [
   {
-    title: "Avaliação Neuropsicológica",
-    text: "Investigação cognitiva, emocional e comportamental com neuropsicólogo parceiro.",
+    title: "Ansiedade",
+    text: "Preocupações excessivas, insegurança, tensão e dificuldades para desacelerar.",
     icon: Brain,
   },
-  { title: "Domiciliar", text: "Atendimento humanizado no ambiente familiar.", icon: Home },
-];
+  {
+    title: "Depressão",
+    text: "Acolhimento diante de tristeza persistente, desânimo e perda de interesse.",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Estresse e sobrecarga emocional",
+    text: "Estratégias para lidar com cobranças, responsabilidades e exaustão.",
+    icon: Stethoscope,
+  },
+  {
+    title: "Autoestima e autoconhecimento",
+    text: "Compreensão de padrões, emoções e da relação consigo mesmo.",
+    icon: Sparkles,
+  },
+  {
+    title: "Regulação emocional",
+    text: "Desenvolvimento de recursos para compreender e manejar emoções.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Relacionamentos",
+    text: "Reflexão sobre vínculos, limites, comunicação e conflitos interpessoais.",
+    icon: HeartHandshake,
+  },
+  {
+    title: "Luto e perdas",
+    text: "Acolhimento e acompanhamento durante processos de perda e reorganização da vida.",
+    icon: Home,
+  },
+  {
+    title: "Transições de vida",
+    text: "Apoio diante de mudanças profissionais, familiares e pessoais.",
+    icon: Sparkles,
+  },
+  {
+    title: "Neurodivergências na vida adulta",
+    text: "Acompanhamento psicológico considerando necessidades e características individuais.",
+    icon: Brain,
+  },
+] as const;
 
-function whatsappLink(message = "Olá, vim pelo site do Centro SER e gostaria de agendar um atendimento.") {
+function whatsappLink(message = "Olá, vim pelo site do Centro SER e gostaria de agendar um atendimento online.") {
   return `${whatsappBase}?text=${encodeURIComponent(message)}`;
 }
 
@@ -117,19 +146,19 @@ function EditorialImage({
   className = "",
   imageClassName = "object-cover",
   innerClassName = "",
-  priority = false,
+  preload = false,
 }: {
   src: string;
   alt: string;
   className?: string;
   imageClassName?: string;
   innerClassName?: string;
-  priority?: boolean;
+  preload?: boolean;
 }) {
   return (
     <div className={`group relative flex overflow-hidden rounded-[2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_30px_90px_rgba(47,111,115,0.13)] ${className}`}>
       <div className={`relative min-h-[320px] flex-1 overflow-hidden rounded-[1.55rem] ${innerClassName}`}>
-        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 48vw, 92vw" className={`${imageClassName} transition duration-700 group-hover:scale-[1.025]`} priority={priority} />
+        <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 48vw, 92vw" className={`${imageClassName} transition duration-700 group-hover:scale-[1.025]`} preload={preload} />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.18))]" />
       </div>
     </div>
@@ -142,7 +171,7 @@ function FramedPhoto({
   width,
   height,
   className = "",
-  priority = false,
+  preload = false,
   children,
 }: {
   src: string;
@@ -150,7 +179,7 @@ function FramedPhoto({
   width: number;
   height: number;
   className?: string;
-  priority?: boolean;
+  preload?: boolean;
   children?: ReactNode;
 }) {
   return (
@@ -163,7 +192,7 @@ function FramedPhoto({
           height={height}
           sizes="(min-width: 1024px) 48vw, 92vw"
           className="h-auto w-full object-contain object-top transition duration-700 group-hover:scale-[1.018]"
-          priority={priority}
+          preload={preload}
         />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.16))]" />
       </div>
@@ -180,23 +209,23 @@ export default function LandingPage({ faqs }: LandingPageProps) {
       <header className="sticky top-0 z-50 border-b border-[#eadfcd]/80 bg-[#fffdf8]/88 shadow-[0_12px_42px_rgba(47,111,115,0.06)] backdrop-blur-2xl">
         <div className="mx-auto flex min-h-[88px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:min-h-[96px] lg:px-8">
           <Link href="#inicio" className="relative h-16 w-48 shrink-0 sm:h-20 sm:w-60 xl:h-[4.75rem] xl:w-64" aria-label="Ir para o início">
-            <Image src="/images/marca-dagua.png" alt="Logo Centro SER Espaço NeuroAfetivo" fill sizes="(min-width: 1024px) 288px, (min-width: 640px) 240px, 192px" className="object-contain object-left" priority />
+            <Image src="/images/marca-dagua.png" alt="Logo Centro SER Espaço NeuroAfetivo" fill sizes="(min-width: 1024px) 288px, (min-width: 640px) 240px, 192px" className="object-contain object-left" preload />
           </Link>
 
-          <nav className="hidden flex-1 items-center justify-center gap-5 xl:flex" aria-label="Navegação principal">
+          <nav className="hidden flex-1 items-center justify-center gap-4 lg:flex xl:gap-5" aria-label="Navegação principal">
             {nav.map(([label, href]) => (
-              <Link key={label} href={href} className="group relative inline-flex h-12 items-center whitespace-nowrap px-1 text-center text-[0.74rem] font-extrabold leading-none text-[#2f6f73] transition duration-300 hover:text-[#245d61]">
+              <Link key={label} href={href} className="group relative inline-flex h-12 items-center whitespace-nowrap px-1 text-center text-[0.68rem] font-extrabold leading-none text-[#2f6f73] transition duration-300 hover:text-[#245d61] xl:text-[0.74rem]">
                 {label}
                 <span className="absolute inset-x-0 bottom-1 h-px origin-left scale-x-0 bg-[#c9ad69] transition duration-300 group-hover:scale-x-100" />
               </Link>
             ))}
           </nav>
 
-          <div className="hidden shrink-0 items-center gap-3 lg:flex">
+          <div className="hidden shrink-0 items-center gap-3 xl:flex">
             <Link href={instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram do Centro SER" className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#e1d6c3] bg-white/82 text-[#2f6f73] shadow-sm transition duration-300 hover:-translate-y-0.5 hover:border-[#c9ad69] hover:text-[#9b7a33]">
               <FaInstagram />
             </Link>
-            <PremiumButton>Agendar pelo WhatsApp</PremiumButton>
+            <PremiumButton>Agendar online</PremiumButton>
           </div>
 
           <details className="relative lg:hidden">
@@ -228,23 +257,23 @@ export default function LandingPage({ faqs }: LandingPageProps) {
 
           <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-10 sm:px-6 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[0.95fr_1.05fr] lg:px-8 lg:py-14 xl:gap-16">
             <div className="relative z-10">
-              <Eyebrow>Psicologia • Educação Inclusiva • IntegraVida</Eyebrow>
+              <Eyebrow>Psicologia Clínica • TCC • Atendimento Online</Eyebrow>
               <h1 className="mt-6 max-w-3xl font-serif text-[2.2rem] font-semibold leading-[1.1] tracking-normal text-[#2f6f73] sm:text-[2.9rem] lg:text-[3.1rem] xl:text-[3.35rem]">
-                Centro SER: cuidado integral para cada fase da vida
+                Psicoterapia para adultos, onde você estiver.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#5f594f] sm:text-xl">
-                Psicologia TCC, desenvolvimento humano, apoio psicopedagógico e atendimento domiciliar humanizado em Piracicaba.
+                Atendimento psicológico online com acolhimento, escuta qualificada e Terapia Cognitivo-Comportamental para ajudar você a compreender emoções, enfrentar desafios e construir uma vida com mais equilíbrio e autonomia.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <PremiumButton large>Agendar pelo WhatsApp</PremiumButton>
-                <PremiumButton href="#atendimentos" variant="secondary" large>
-                  Conhecer atendimentos
+                <PremiumButton large>Agendar atendimento online</PremiumButton>
+                <PremiumButton href="#areas" variant="secondary" large>
+                  Conhecer áreas de atuação
                 </PremiumButton>
               </div>
 
               <div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {["CRP 06/213394", "Atendimento Presencial", "Atendimento Online", "Atendimento Domiciliar"].map((item) => (
+                {["CRP 06/213394", "Atendimento Online", "Adultos", "Atendimento Presencial"].map((item) => (
                   <div key={item} className="border-l border-[#d8c79a] pl-4">
                     <p className="text-sm font-extrabold leading-6 text-[#344947]">{item}</p>
                   </div>
@@ -256,11 +285,11 @@ export default function LandingPage({ faqs }: LandingPageProps) {
               <div className="group relative rounded-[2.2rem] border border-[#eadfcd] bg-white p-3 shadow-[0_34px_100px_rgba(47,111,115,0.18)]">
                 <div className="absolute -right-5 -top-5 h-24 w-24 rounded-full border border-[#c9ad69]/35" />
                 <div className="relative min-h-[380px] overflow-hidden rounded-[1.7rem] sm:min-h-[560px]">
-                  <Image src="/images/fachada.jpg" alt="Fachada do Centro SER em Piracicaba" fill sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" priority />
+                  <Image src="/images/fachada.jpg" alt="Ambiente acolhedor do Centro SER" fill sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover transition duration-700 group-hover:scale-[1.035]" loading="eager" fetchPriority="high" />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(32,61,61,0.02),rgba(32,61,61,0.34))]" />
                   <div className="absolute bottom-5 left-5 right-5 rounded-[1.35rem] border border-white/40 bg-white/90 p-4 shadow-[0_18px_50px_rgba(32,61,61,0.18)] backdrop-blur-md sm:left-6 sm:right-auto sm:w-[21rem]">
-                    <p className="text-sm font-extrabold text-[#2f6f73]">Atendimento Presencial</p>
-                    <p className="mt-2 text-sm font-bold text-[#5f594f]">Online • Domiciliar</p>
+                    <p className="text-sm font-extrabold text-[#2f6f73]">Atendimento psicológico</p>
+                    <p className="mt-2 text-sm font-bold text-[#5f594f]">Online • Presencial</p>
                   </div>
                 </div>
               </div>
@@ -279,16 +308,19 @@ export default function LandingPage({ faqs }: LandingPageProps) {
             <div>
               <Eyebrow>O Centro SER</Eyebrow>
               <h2 className="mt-5 max-w-2xl font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Um espaço para acolher histórias, fortalecer vínculos e desenvolver autonomia
+                Um espaço de escuta, acolhimento e transformação
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#625d54]">
-                O Centro SER integra Psicologia, Educação Especial e cuidado humanizado para apoiar saúde emocional, aprendizagem, desenvolvimento e qualidade de vida. Cada atendimento é conduzido com delicadeza, ciência e respeito à singularidade de cada pessoa.
+                O Centro SER é um espaço dedicado ao cuidado psicológico de adultos, com uma prática clínica que une acolhimento, conhecimento técnico e respeito à singularidade de cada pessoa.
+              </p>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-[#625d54]">
+                A psicoterapia oferece um espaço seguro para compreender pensamentos, emoções, comportamentos e relações, favorecendo novas formas de lidar com os desafios da vida.
               </p>
               <div className="mt-10 grid gap-6 sm:grid-cols-3">
                 {[
-                  { title: "Acolhimento", text: "Escuta qualificada e presença.", icon: HeartHandshake },
-                  { title: "Ética", text: "Cuidado profissional e sigiloso.", icon: ShieldCheck },
-                  { title: "Singularidade", text: "Um olhar para cada história.", icon: Sparkles },
+                  { title: "Acolhimento", text: "Escuta qualificada, respeito e presença.", icon: HeartHandshake },
+                  { title: "Ética", text: "Atuação profissional, responsável e sigilosa.", icon: ShieldCheck },
+                  { title: "Singularidade", text: "Cada história pede um olhar individualizado.", icon: Sparkles },
                 ].map(({ title, text, icon: Icon }) => (
                   <div key={title} className="border-t border-[#d9c58b] pt-5">
                     <Icon className="text-[#2f6f73]" size={24} />
@@ -309,13 +341,53 @@ export default function LandingPage({ faqs }: LandingPageProps) {
           </div>
         </section>
 
+        <section id="online" className="relative overflow-hidden bg-[#203d3d]">
+          <div className="pointer-events-none absolute left-[-8rem] top-12 h-72 w-72 rounded-full bg-[#8bbac1]/16 blur-3xl" />
+          <div className="pointer-events-none absolute bottom-8 right-[-6rem] h-80 w-80 rounded-full bg-[#c9ad69]/14 blur-3xl" />
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:py-28">
+            <div>
+              <Eyebrow light>Atendimento Online</Eyebrow>
+              <h2 className="mt-5 max-w-3xl font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl">
+                Psicoterapia online para adultos
+              </h2>
+              <p className="mt-5 text-xl font-semibold leading-8 text-[#dec987]">
+                Cuidado psicológico que acompanha você, onde estiver.
+              </p>
+            </div>
+
+            <div className="rounded-[2rem] border border-white/14 bg-white/[0.07] p-7 shadow-[0_30px_90px_rgba(18,41,41,0.3)] backdrop-blur sm:p-9">
+              <p className="text-lg leading-8 text-[#edf5f3]">
+                A psicoterapia online permite realizar seu acompanhamento psicológico com privacidade, segurança e continuidade, sem a necessidade de deslocamento.
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#edf5f3]">
+                As sessões acontecem por videochamada, em horário previamente agendado, preservando a qualidade da escuta, do vínculo terapêutico e do acompanhamento clínico.
+              </p>
+              <div className="mt-8 grid gap-4 md:grid-cols-3">
+                {[
+                  { title: "Mais praticidade", text: "Faça suas sessões de um ambiente reservado, sem deslocamentos." },
+                  { title: "Continuidade", text: "Mantenha seu acompanhamento mesmo diante de viagens ou mudanças de rotina." },
+                  { title: "Acolhimento e privacidade", text: "Um espaço individual de escuta e cuidado também no ambiente online." },
+                ].map(({ title, text }) => (
+                  <article key={title} className="rounded-[1.35rem] border border-white/12 bg-white/[0.08] p-5">
+                    <h3 className="text-base font-extrabold text-white">{title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-[#dfeae7]">{text}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="mt-8">
+                <PremiumButton large>Agendar atendimento online</PremiumButton>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="relative overflow-hidden bg-[#fbf8f1]">
           <div className="pointer-events-none absolute left-0 top-20 h-64 w-64 rounded-full bg-[#8bbac1]/12 blur-3xl" />
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
             <div className="max-w-3xl">
               <Eyebrow>Duas frentes de cuidado</Eyebrow>
               <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Dois pilares fortes, um mesmo olhar integral
+                Cuidado psicológico e cuidado domiciliar, em frentes distintas
               </h2>
             </div>
 
@@ -324,20 +396,26 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#2f6f73]">
                   <Brain size={24} />
                 </div>
-                <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Espaço NeuroAfetivo</p>
-                <h3 className="mt-2 font-serif text-3xl text-[#283f3f]">Psicoterapia TCC com olhar neuroafetivo</h3>
+                <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Psicologia Clínica</p>
+                <h3 className="mt-2 font-serif text-3xl text-[#283f3f]">Psicoterapia TCC para adultos</h3>
                 <p className="mt-4 leading-7 text-[#56615e]">
-                  Atendimento para crianças, adolescentes, adultos e idosos, integrando saúde emocional, aprendizagem e vínculos familiares.
+                  Acompanhamento psicológico individual para adultos, utilizando princípios da Terapia Cognitivo-Comportamental e uma escuta atenta às necessidades de cada pessoa.
                 </p>
                 <div className="mt-6 rounded-[1.35rem] border border-[#d8c078]/70 bg-white/82 p-4 shadow-[0_16px_42px_rgba(47,111,115,0.08)]">
                   <span className="inline-flex rounded-full bg-[#2f6f73] px-3 py-1 text-[0.66rem] font-extrabold uppercase tracking-[0.2em] text-white">
-                    NOVO
+                    Atendimento Online
                   </span>
-                  <p className="mt-3 font-serif text-2xl leading-8 text-[#283f3f]">Avaliação Neuropsicológica</p>
-                  <p className="mt-1 text-sm font-bold leading-6 text-[#56615e]">Realizada por Neuropsicólogo Parceiro.</p>
+                  <p className="mt-3 font-serif text-2xl leading-8 text-[#283f3f]">Psicoterapia para adultos com sessões individuais por videochamada.</p>
                 </div>
                 <ul className="mt-7 grid gap-3">
-                  {["Psicoterapia infantil e infanto-juvenil", "Ansiedade, depressão, luto e regulação emocional", "Autoconhecimento e saúde mental", "Apoio psicopedagógico e reforço especializado", "Orientação familiar e neurodivergências"].map((item) => (
+                  {[
+                    "Ansiedade e preocupações",
+                    "Depressão e alterações de humor",
+                    "Autoestima e autoconhecimento",
+                    "Regulação emocional",
+                    "Luto e mudanças de vida",
+                    "Relacionamentos e conflitos",
+                  ].map((item) => (
                     <Bullet key={item}>{item}</Bullet>
                   ))}
                 </ul>
@@ -350,7 +428,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 <p className="mt-6 text-xs font-extrabold uppercase tracking-[0.22em] text-[#2f6f73]">IntegraVida</p>
                 <h3 className="mt-2 font-serif text-3xl text-[#4a3c23]">Cuidado domiciliar, autonomia e bem-estar</h3>
                 <p className="mt-4 leading-7 text-[#625848]">
-                  Uma frente humana para idosos, pessoas com mobilidade reduzida e pessoas com deficiência, respeitando rotina e família.
+                  Uma frente de cuidado humanizado para pessoas que necessitam de acompanhamento no ambiente familiar, respeitando sua rotina, autonomia e contexto.
                 </p>
                 <ul className="mt-7 grid gap-3">
                   {["Cuidado no ambiente familiar", "Apoio à autonomia e ao bem-estar", "Suporte psicomotor", "Prevenção de quedas", "Acolhimento e orientação à família"].map((item) => (
@@ -362,20 +440,20 @@ export default function LandingPage({ faqs }: LandingPageProps) {
           </div>
         </section>
 
-        <section id="atendimentos" className="bg-white">
+        <section id="areas" className="bg-white">
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
             <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
               <div className="max-w-3xl">
-                <Eyebrow>Atendimentos</Eyebrow>
+                <Eyebrow>Áreas de Atuação</Eyebrow>
                 <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                  Cuidado organizado para cada fase da vida
+                  Acompanhamento psicológico para diferentes desafios da vida adulta
                 </h2>
               </div>
               <PremiumButton>Agendar uma conversa</PremiumButton>
             </div>
 
-            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {services.map(({ title, text, icon: Icon }) => (
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {adultCareAreas.map(({ title, text, icon: Icon }) => (
                 <article key={title} className="rounded-[1.5rem] border border-[#eadfcd] bg-[#fffdf8] p-6 shadow-[0_14px_40px_rgba(45,63,61,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d8c078] hover:shadow-[0_22px_58px_rgba(47,111,115,0.11)]">
                   <Icon className="text-[#2f6f73] transition duration-300" size={22} />
                   <h3 className="mt-5 text-lg font-extrabold text-[#302d27]">{title}</h3>
@@ -383,6 +461,9 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 </article>
               ))}
             </div>
+            <p className="mt-8 max-w-3xl text-sm font-semibold leading-7 text-[#716b60]">
+              As demandas são avaliadas individualmente durante o primeiro contato e ao longo do processo terapêutico.
+            </p>
           </div>
         </section>
 
@@ -392,14 +473,14 @@ export default function LandingPage({ faqs }: LandingPageProps) {
               <div className="absolute -left-5 top-10 hidden h-28 w-28 rounded-full border border-[#d8c078]/35 lg:block" />
               <FramedPhoto
                 src="/images/silvia-retrato-principal.jpeg"
-                alt="Retrato profissional de Silvia Helena Tamborim"
+                alt="Retrato profissional de Sílvia Helena Tamborim"
                 width={718}
                 height={710}
-                priority
+                preload
               >
                 <div className="absolute bottom-6 left-6 right-6 rounded-[1.45rem] border border-[#dbc487] bg-[#fffdf8]/92 p-5 shadow-[0_20px_55px_rgba(92,74,37,0.16)] backdrop-blur">
                   <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-[#9b7a33]">Profissional responsável</p>
-                  <p className="mt-2 font-serif text-2xl leading-8 text-[#2f6f73]">CRP 06/213394</p>
+                  <p className="mt-2 font-serif text-2xl leading-8 text-[#2f6f73]">Psicóloga Clínica — CRP 06/213394</p>
                 </div>
               </FramedPhoto>
             </div>
@@ -407,8 +488,9 @@ export default function LandingPage({ faqs }: LandingPageProps) {
             <div>
               <Eyebrow>Profissional Responsável</Eyebrow>
               <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Silvia Helena Tamborim
+                Sílvia Helena Tamborim
               </h2>
+              <p className="mt-3 text-lg font-extrabold leading-8 text-[#2f6f73]">Psicóloga Clínica — CRP 06/213394</p>
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {[
                   "Psicóloga Clínica",
@@ -416,7 +498,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                   "Especialista em Terapia Cognitivo-Comportamental",
                   "Pedagoga",
                   "Especialista em Educação Inclusiva",
-                  "Mais de 25 anos de experiência",
+                  "Mais de 25 anos de experiência profissional",
                 ].map((item) => (
                   <div key={item} className="rounded-2xl border border-[#eadfcd] bg-white px-5 py-4 text-sm font-extrabold leading-6 text-[#3d3932] shadow-[0_12px_32px_rgba(45,63,61,0.05)]">
                     {item}
@@ -424,10 +506,13 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 ))}
               </div>
               <p className="mt-8 text-lg leading-8 text-[#625d54]">
-                Silvia conduz um trabalho clínico marcado por escuta, ética e precisão técnica. Sua trajetória integra Psicologia, Terapia Cognitivo-Comportamental, Pedagogia e Educação Inclusiva para construir planos de cuidado sensíveis à história, ao contexto familiar e às necessidades de cada pessoa.
+                Sílvia Helena Tamborim é psicóloga clínica e especialista em Terapia Cognitivo-Comportamental (TCC). Sua atuação é voltada ao atendimento psicológico de adultos, oferecendo um espaço de escuta, acolhimento e desenvolvimento emocional.
               </p>
               <p className="mt-5 text-lg leading-8 text-[#625d54]">
-                No Centro SER, sua atuação une acolhimento e método, oferecendo um acompanhamento humanizado para desenvolvimento emocional, aprendizagem, autonomia e qualidade de vida.
+                Em sua prática clínica, busca compreender cada pessoa para além da demanda que a levou à terapia, considerando sua história, seus relacionamentos, seu contexto e os desafios presentes em sua vida.
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#625d54]">
+                Sua trajetória profissional também reúne experiência em Pedagogia e Educação Inclusiva, ampliando seu olhar sobre desenvolvimento humano, aprendizagem, autonomia e singularidade.
               </p>
             </div>
           </div>
@@ -444,23 +529,22 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                     Formação sólida para um cuidado completo e confiável
                   </h2>
                   <p className="text-lg leading-8 text-[#625d54] lg:border-l lg:border-[#d8c078]/45 lg:pl-9">
-                    Uma atuação construída na interseção entre saúde mental, educação e inclusão, com repertório para acolher demandas clínicas, familiares, escolares e domiciliares com segurança, clareza e responsabilidade.
+                    Uma atuação construída na interseção entre saúde mental, educação e inclusão, com repertório para acolher demandas clínicas de adultos e compreender trajetórias com segurança, clareza e responsabilidade.
                   </p>
                 </div>
 
                 <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-12">
                   {[
                     "Psicóloga Clínica",
+                    "CRP 06/213394",
+                    "Especialista em Terapia Cognitivo-Comportamental",
                     "Pedagoga",
                     "Especialista em Educação Inclusiva",
-                    "Terapia Cognitivo-Comportamental",
-                    "Atendimento Presencial",
-                    "Atendimento Online",
-                    "Atendimento Domiciliar",
+                    "Mais de 25 anos de experiência profissional",
                   ].map((item, index) => (
                     <div
                       key={item}
-                      className={`group flex min-h-24 items-center gap-4 rounded-[1.35rem] border border-[#eadfcd] bg-white/90 px-5 py-5 text-sm font-extrabold leading-6 text-[#3d3932] shadow-[0_14px_38px_rgba(45,63,61,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d8c078] hover:shadow-[0_20px_48px_rgba(47,111,115,0.1)] lg:px-6 ${index < 3 ? "lg:col-span-4" : "lg:col-span-3"} ${index === 6 ? "sm:col-span-2 lg:col-span-3" : ""}`}
+                      className={`group flex min-h-24 items-center gap-4 rounded-[1.35rem] border border-[#eadfcd] bg-white/90 px-5 py-5 text-sm font-extrabold leading-6 text-[#3d3932] shadow-[0_14px_38px_rgba(45,63,61,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d8c078] hover:shadow-[0_20px_48px_rgba(47,111,115,0.1)] lg:px-6 ${index < 3 ? "lg:col-span-4" : "lg:col-span-3"} ${index === 5 ? "sm:col-span-2 lg:col-span-3" : ""}`}
                     >
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d8c078]/45 bg-[#fbf8f1] transition duration-300 group-hover:bg-[#f5eedc]">
                         <Check className="text-[#b28b3d]" size={18} />
@@ -474,24 +558,89 @@ export default function LandingPage({ faqs }: LandingPageProps) {
           </div>
         </section>
 
+        <section id="como-funciona" className="bg-white">
+          <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+            <div className="grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+              <div>
+                <Eyebrow>Como Funciona</Eyebrow>
+                <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
+                  Começar pode ser mais simples do que você imagina.
+                </h2>
+                <div className="mt-8">
+                  <PremiumButton large>Quero conversar sobre atendimento</PremiumButton>
+                </div>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                {[
+                  {
+                    step: "1",
+                    title: "Entre em contato",
+                    text: "Converse pelo WhatsApp para obter informações e verificar disponibilidade de horários.",
+                  },
+                  {
+                    step: "2",
+                    title: "Agende sua sessão",
+                    text: "Escolha o horário disponível mais adequado à sua rotina.",
+                  },
+                  {
+                    step: "3",
+                    title: "Primeiro encontro",
+                    text: "A primeira sessão é um momento para conhecer sua história, compreender suas necessidades e conversar sobre os objetivos da psicoterapia.",
+                  },
+                  {
+                    step: "4",
+                    title: "Processo terapêutico",
+                    text: "O acompanhamento é construído individualmente, respeitando suas necessidades, objetivos e evolução.",
+                  },
+                ].map(({ step, title, text }) => (
+                  <article key={step} className="rounded-[1.5rem] border border-[#eadfcd] bg-[#fffdf8] p-6 shadow-[0_14px_40px_rgba(45,63,61,0.06)]">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2f6f73] text-sm font-extrabold text-white">{step}</span>
+                    <h3 className="mt-5 text-lg font-extrabold text-[#302d27]">{title}</h3>
+                    <p className="mt-3 text-sm leading-6 text-[#676157]">{text}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="tcc" className="bg-[#fbf8f1]">
+          <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:px-8 lg:py-28">
+            <div>
+              <Eyebrow>Terapia Cognitivo-Comportamental</Eyebrow>
+              <h2 className="mt-5 max-w-3xl font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
+                Compreender padrões para construir novas possibilidades.
+              </h2>
+            </div>
+            <div className="rounded-[2rem] border border-[#eadfcd] bg-white p-7 shadow-[0_22px_60px_rgba(45,63,61,0.08)] sm:p-9">
+              <p className="text-lg leading-8 text-[#625d54]">
+                A Terapia Cognitivo-Comportamental (TCC) é uma abordagem da Psicologia que trabalha a relação entre pensamentos, emoções e comportamentos.
+              </p>
+              <p className="mt-5 text-lg leading-8 text-[#625d54]">
+                Durante o processo terapêutico, psicóloga e paciente trabalham de forma colaborativa na compreensão de padrões e no desenvolvimento de estratégias para enfrentar dificuldades e promover mudanças.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section id="ambiente" className="bg-white">
           <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
             <div className="max-w-3xl">
               <Eyebrow>Ambiente</Eyebrow>
               <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-[#292620] sm:text-5xl">
-                Um ambiente preparado para acolher
+                Atendimento presencial em um ambiente acolhedor
               </h2>
               <p className="mt-5 text-lg leading-8 text-[#625d54]">
-                Fotos reais do espaço, pensado para oferecer conforto, tranquilidade e privacidade durante o atendimento.
+                Além da psicoterapia online, o Centro SER dispõe de um ambiente preparado para proporcionar privacidade, conforto e acolhimento durante os atendimentos presenciais.
               </p>
             </div>
 
             <div className="mt-12 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-              <EditorialImage src="/images/consultorio-1.jpg" alt="Sala de atendimento do Centro SER" className="min-h-[440px]" />
+              <EditorialImage src="/images/consultorio-1.jpg" alt="Sala de atendimento presencial do Centro SER" className="min-h-[440px]" />
               <div className="grid gap-5">
-                <EditorialImage src="/images/fachada.jpg" alt="Fachada do Centro SER" className="min-h-[260px]" />
+                <EditorialImage src="/images/fachada.jpg" alt="Entrada do Centro SER" className="min-h-[260px]" />
                 <div className="rounded-[2rem] border border-[#eadfcd] bg-[#fbf8f1] p-7 shadow-[0_20px_60px_rgba(47,111,115,0.08)]">
-                  <p className="font-serif text-2xl leading-8 text-[#2f6f73]">Arquitetura simples, privacidade e detalhes pensados para um cuidado tranquilo.</p>
+                  <p className="font-serif text-2xl leading-8 text-[#2f6f73]">Privacidade, conforto e acolhimento para os encontros presenciais.</p>
                 </div>
               </div>
             </div>
@@ -507,10 +656,10 @@ export default function LandingPage({ faqs }: LandingPageProps) {
               Cuidar é integrar corpo, mente e afeto.
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#edf5f3]">
-              Agende uma conversa e conheça um espaço dedicado ao acolhimento, ao desenvolvimento humano e à saúde emocional.
+              Dê o primeiro passo para cuidar da sua saúde emocional. Entre em contato e conheça as possibilidades de atendimento psicológico.
             </p>
             <div className="mt-8 flex justify-center">
-              <PremiumButton large>Falar pelo WhatsApp</PremiumButton>
+              <PremiumButton large>Agendar atendimento online</PremiumButton>
             </div>
           </div>
         </section>
@@ -555,7 +704,7 @@ export default function LandingPage({ faqs }: LandingPageProps) {
                 </Link>
               </div>
               <p className="mt-8 text-sm leading-7 text-[#625d54]">
-                Psicologia TCC, educação inclusiva e atendimento domiciliar humanizado em Piracicaba.
+                Psicoterapia para adultos • Terapia Cognitivo-Comportamental • Atendimento online e presencial
               </p>
             </div>
           </div>

@@ -4,37 +4,31 @@ const siteUrl = "https://centro-ser-pop-saude.vercel.app";
 const instagram = "https://www.instagram.com/centro_ser_espaco_neuroafetivo/";
 
 const services = [
-  "Psicoterapia Infantil",
-  "Psicoterapia para Adolescentes",
   "Psicoterapia para Adultos",
-  "Psicoterapia para Idosos",
+  "Psicoterapia Online para Adultos",
   "Terapia Cognitivo-Comportamental",
-  "Reforço Escolar Especializado",
-  "Apoio Psicopedagógico",
-  "Atendimento a Crianças Neurodivergentes",
-  "Avaliação Neuropsicológica",
   "Atendimento Online",
+  "Atendimento Presencial",
   "Atendimento Domiciliar Humanizado",
-  "Atendimento para Idosos",
   "Atendimento para Pessoas com Mobilidade Reduzida",
   "Atendimento para Pessoas com Deficiência",
 ];
 
 const faqs = [
   {
-    question: "O Centro SER atende crianças?",
+    question: "O atendimento psicológico online é para adultos?",
     answer:
-      "Sim. O Centro SER realiza atendimento infantil com olhar acolhedor, recursos lúdicos e abordagem voltada ao desenvolvimento emocional, social e familiar.",
+      "Sim. A psicoterapia online é voltada ao atendimento psicológico individual de adultos.",
   },
   {
-    question: "Há atendimento para adolescentes e adultos?",
+    question: "Qual abordagem é utilizada na psicoterapia?",
     answer:
-      "Sim. São realizados atendimentos para adolescentes, adultos e idosos, com psicoterapia baseada na Terapia Cognitivo-Comportamental (TCC).",
+      "A atuação clínica utiliza princípios da Terapia Cognitivo-Comportamental (TCC), com escuta qualificada e acompanhamento individualizado.",
   },
   {
     question: "O Centro SER oferece atendimento online?",
     answer:
-      "Sim. Além dos atendimentos presenciais, também há possibilidade de atendimento online conforme a necessidade de cada caso.",
+      "Sim. O atendimento online é a modalidade principal, realizado por videochamada em horário previamente agendado.",
   },
   {
     question: "O que é o IntegraVida?",
@@ -42,9 +36,9 @@ const faqs = [
       "O IntegraVida é uma frente de atendimento domiciliar humanizado voltada principalmente para idosos, pessoas com mobilidade reduzida e pessoas com deficiência.",
   },
   {
-    question: "O Centro SER atende crianças neurodivergentes?",
+    question: "Também há atendimento presencial?",
     answer:
-      "Sim. O Centro SER oferece acolhimento e suporte especializado a crianças neurodivergentes, integrando Psicologia, Educação Inclusiva e orientação familiar.",
+      "Sim. Além da psicoterapia online, o Centro SER mantém atendimento presencial em ambiente preparado para privacidade, conforto e acolhimento.",
   },
   {
     question: "Como agendar um atendimento?",
@@ -64,7 +58,7 @@ const jsonLd = {
       image: [`${siteUrl}/images/logo-centro-ser.png`, `${siteUrl}/images/fachada.jpg`],
       logo: `${siteUrl}/images/logo-centro-ser.png`,
       description:
-        "Centro SER - Espaco NeuroAfetivo & IntegraVida em Piracicaba, SP. Psicologia TCC, educacao inclusiva e atendimento domiciliar humanizado.",
+        "Centro SER - Espaco NeuroAfetivo & IntegraVida. Psicoterapia online para adultos, Terapia Cognitivo-Comportamental, atendimento presencial e atendimento domiciliar humanizado.",
       telephone: "+55 19 99604-4947",
       email: "psi.silviatamborim@gmail.com",
       sameAs: [instagram],
@@ -88,8 +82,8 @@ const jsonLd = {
     {
       "@type": "Person",
       "@id": `${siteUrl}/#silvia-tamborim`,
-      name: "Silvia Helena Tamborim",
-      jobTitle: "Psicologa TCC, Pedagoga e Especialista em Educacao Inclusiva",
+      name: "Sílvia Helena Tamborim",
+      jobTitle: "Psicologa Clinica e Especialista em Terapia Cognitivo-Comportamental",
       affiliation: {
         "@id": `${siteUrl}/#centro-ser`,
       },
@@ -97,11 +91,11 @@ const jsonLd = {
       email: "psi.silviatamborim@gmail.com",
       knowsAbout: [
         "Terapia Cognitivo-Comportamental",
+        "Psicoterapia para adultos",
+        "Atendimento psicologico online",
         "Educacao Inclusiva",
-        "TEA",
-        "Neurodivergencias",
+        "Neurodivergencias na vida adulta",
         "Atendimento domiciliar",
-        "Orientacao familiar",
       ],
       identifier: "CRP 06/213394",
     },
